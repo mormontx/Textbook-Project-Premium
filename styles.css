@@ -2397,3 +2397,17 @@ body {
 .qb-questions::-webkit-scrollbar-track {
     background: #1a0028 !important;
 }
+
+/* Question Images */
+.qb-question-image {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.qb-question-image img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    border: 2px solid #c8a2c8;
+    box-shadow: 0 0 15px rgba(200, 162, 200, 0.3);
+}

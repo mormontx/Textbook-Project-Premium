@@ -1019,6 +1019,7 @@ function renderQBQuestions() {
                         ${q.tags?.map(tag => `<span class="qb-tag">${tag}</span>`).join('') || ''}
                     </div>
                 </div>
+                ${q.image ? `<div class="qb-question-image"><img src="${q.image}" alt="Question diagram"></div>` : ""}
                 <div class="qb-question-text">${q.question_text}</div>
                 <div class="qb-answer-area">
                     <textarea class="qb-answer-textarea" placeholder="Write your answer here..."></textarea>
