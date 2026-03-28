@@ -1,0 +1,34 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+# This enabled local testing without a live server
+local_backend: true
+
+# These lines should match where your images are stored in the repo
+media_folder: "images/questions"
+public_folder: "images/questions"
+
+# This defines the data structure
+collections:
+  - name: "database"
+    label: "Database Files"
+    files:
+      - label: "Question Bank"
+        name: "question_bank"
+        file: "data/question-bank.json"
+        fields:
+          - label: "Questions List"
+            name: "questions"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "Topic", name: "topic", widget: "string"}
+              - {label: "Subtopic", name: "subtopic", widget: "string"}
+              - {label: "Level", name: "level", widget: "select", options: ["SL", "HL"]}
+              - {label: "Paper", name: "paper", widget: "select", options: ["Paper 1", "Paper 2"]}
+              - {label: "Difficulty", name: "difficulty", widget: "select", options: ["baby", "crawler", "toddler", "dancer", "monster"]}
+              - {label: "Tags", name: "tags", widget: "list"}
+              - {label: "Question Text", name: "question_text", widget: "text"}
+              - {label: "Markscheme Answer", name: "markscheme_answer", widget: "text"}
+              - {label: "Image", name: "image", widget: "image", required: false}
