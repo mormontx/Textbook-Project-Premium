@@ -25,28 +25,30 @@
 
   <style>
     :root {
-      color-scheme: dark;
-      /* Dominant Violet + Warm Cream Palette with Toxic Green & Moon Blue */
-      --bg-violet-deep: #140b29;
-      --bg-violet-surface: #1f123d;
-      --bg-violet-elevated: #2a1952;
-      --bg-violet-glass: rgba(24, 13, 48, 0.88);
+      color-scheme: light;
+      /* Cream Background + Dominant Deep Violet + Toxic Green + Moon Blue */
+      --bg-cream-canvas: #f7f1e3;
+      --bg-cream-surface: #fffdf7;
+      --bg-cream-warm: #efe6d2;
+      --bg-cream-glass: rgba(247, 241, 227, 0.9);
 
-      --cream-pure: #fbf6ec;
-      --cream-warm: #f3ead8;
-      --cream-soft: #e6dcf5;
-      --cream-muted: #c6b7de;
-      --violet-ink: #190d33;
+      --violet-deep: #1a0c36;
+      --violet-royal: #26134d;
+      --violet-elevated: #331b66;
+      --violet-muted: #523b7a;
+      --violet-soft-tint: color-mix(in oklab, var(--violet-royal), transparent 92%);
 
       --toxic-green: #39ff14;
-      --toxic-green-tint: color-mix(in oklab, var(--toxic-green), transparent 84%);
-      --moon-blue: #8be0ff;
-      --moon-blue-deep: #60a5fa;
-      --moon-blue-tint: color-mix(in oklab, var(--moon-blue), transparent 84%);
+      --toxic-green-deep: #158000;
+      --toxic-green-tint: color-mix(in oklab, var(--toxic-green), transparent 82%);
 
-      --border-cream: color-mix(in oklab, var(--cream-pure), transparent 78%);
-      --border-cream-strong: color-mix(in oklab, var(--cream-pure), transparent 55%);
-      --border-moon: color-mix(in oklab, var(--moon-blue), transparent 62%);
+      --moon-blue: #7dd3fc;
+      --moon-blue-ink: #035388;
+      --moon-blue-border: #38bdf8;
+      --moon-blue-tint: color-mix(in oklab, var(--moon-blue), transparent 78%);
+
+      --border-violet: color-mix(in oklab, var(--violet-deep), transparent 82%);
+      --border-violet-strong: color-mix(in oklab, var(--violet-deep), transparent 68%);
 
       --font-serif: 'Crimson Pro', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -55,9 +57,8 @@
 
     @media (forced-colors: active) {
       :root {
-        --border-cream: CanvasText;
-        --border-cream-strong: Highlight;
-        --border-moon: Highlight;
+        --border-violet: CanvasText;
+        --border-violet-strong: Highlight;
       }
     }
 
@@ -68,26 +69,26 @@
     }
 
     body {
-      background-color: var(--bg-violet-deep);
+      background-color: var(--bg-cream-canvas);
       background-image:
-        radial-gradient(ellipse 85% 55% at 50% -12%, rgba(139, 224, 255, 0.16), transparent 70%),
-        radial-gradient(ellipse 65% 45% at 12% 35%, rgba(168, 85, 247, 0.22), transparent 70%),
-        radial-gradient(ellipse 60% 45% at 88% 82%, rgba(57, 255, 20, 0.08), transparent 70%);
-      color: var(--cream-pure);
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(125, 211, 252, 0.28), transparent 70%),
+        radial-gradient(ellipse 65% 45% at 10% 35%, rgba(88, 28, 135, 0.08), transparent 70%),
+        radial-gradient(ellipse 60% 45% at 90% 85%, rgba(57, 255, 20, 0.1), transparent 70%);
+      color: var(--violet-deep);
       font-family: var(--font-sans);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       min-block-size: 100dvh;
     }
 
-    /* Top Academic Navigation Bar */
+    /* Top Academic Navigation Bar on Cream */
     .academic-topbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--bg-violet-glass);
+      background: var(--bg-cream-glass);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-cream);
+      border-bottom: 1.5px solid var(--border-violet-strong);
       padding-block: 0.8rem;
       padding-inline: clamp(1.25rem, 4vw, 3.5rem);
       display: flex;
@@ -109,17 +110,19 @@
       font-size: 0.75rem;
       font-weight: 700;
       color: var(--toxic-green);
-      background: var(--toxic-green-tint);
-      border: 1px solid color-mix(in oklab, var(--toxic-green), transparent 55%);
-      padding: 0.22rem 0.7rem;
+      background: var(--violet-deep);
+      border: 1.5px solid var(--moon-blue-border);
+      padding: 0.25rem 0.75rem;
       border-radius: 6px;
       letter-spacing: 0.04em;
+      box-shadow: 0 2px 10px rgba(26, 12, 54, 0.18);
     }
 
     .series-label {
       font-family: var(--font-mono);
       font-size: 0.75rem;
-      color: var(--cream-Warm, var(--cream-warm));
+      font-weight: 600;
+      color: var(--violet-muted);
       letter-spacing: 0.03em;
     }
 
@@ -133,8 +136,8 @@
 
     .nav-link {
       font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--cream-warm);
+      font-weight: 700;
+      color: var(--violet-royal);
       text-decoration: none;
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
@@ -143,28 +146,28 @@
     }
 
     .nav-link:hover {
-      color: var(--moon-blue);
-      background: rgba(251, 246, 236, 0.07);
-      border-color: var(--border-moon);
+      color: var(--violet-deep);
+      background: var(--moon-blue-tint);
+      border-color: var(--moon-blue-border);
     }
 
     .nav-btn-primary {
       font-family: var(--font-mono);
       font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--violet-ink);
+      font-weight: 800;
+      color: var(--violet-deep);
       background: var(--toxic-green);
-      padding: 0.45rem 0.95rem;
+      padding: 0.48rem 0.95rem;
       border-radius: 6px;
-      border: 1px solid var(--toxic-green);
+      border: 1.5px solid var(--violet-deep);
       cursor: pointer;
-      box-shadow: 0 0 16px rgba(57, 255, 20, 0.28);
-      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px var(--violet-deep);
+      transition: all 0.18s ease;
     }
 
     .nav-btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 22px rgba(57, 255, 20, 0.45);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px var(--violet-deep);
     }
 
     /* Page Container */
@@ -178,9 +181,9 @@
       gap: 3rem;
     }
 
-    /* Academic Masthead */
+    /* Academic Masthead on Cream */
     .masthead {
-      border-bottom: 1px solid var(--border-cream-strong);
+      border-bottom: 2px solid var(--violet-deep);
       padding-bottom: 2rem;
       display: flex;
       flex-wrap: wrap;
@@ -192,26 +195,32 @@
     .masthead-kicker {
       font-family: var(--font-mono);
       font-size: 0.78rem;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--moon-blue);
-      margin-bottom: 0.45rem;
+      color: var(--moon-blue-ink);
+      background: var(--moon-blue-tint);
+      border: 1px solid var(--moon-blue-border);
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 0.6rem;
     }
 
     .masthead-title {
       font-family: var(--font-serif);
-      font-size: clamp(1.9rem, 1.25rem + 2.2vw, 3.1rem);
+      font-size: clamp(2rem, 1.3rem + 2.2vw, 3.15rem);
       font-weight: 700;
-      line-height: 1.12;
+      line-height: 1.1;
       letter-spacing: -0.015em;
-      color: var(--cream-pure);
+      color: var(--violet-deep);
       max-inline-size: 28ch;
     }
 
     .masthead-subtitle {
       font-family: var(--font-serif);
-      font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.28rem);
-      color: var(--cream-warm);
+      font-size: clamp(1.08rem, 0.98rem + 0.4vw, 1.3rem);
+      color: var(--violet-royal);
       margin-top: 0.6rem;
       max-inline-size: 68ch;
       line-height: 1.5;
@@ -219,8 +228,8 @@
 
     .author-credentials {
       margin-top: 0.9rem;
-      font-size: 0.82rem;
-      color: var(--cream-muted);
+      font-size: 0.84rem;
+      color: var(--violet-muted);
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
@@ -228,24 +237,25 @@
     }
 
     .author-credentials strong {
-      color: var(--cream-pure);
+      color: var(--violet-deep);
     }
 
+    /* Deep Violet Telemetry Box on Cream Canvas */
     .telemetry-box {
       display: grid;
       grid-template-columns: repeat(3, auto);
-      background: var(--cream-pure);
-      color: var(--violet-ink);
-      border: 2px solid var(--moon-blue);
+      background: var(--violet-deep);
+      color: var(--bg-cream-surface);
+      border: 2px solid var(--moon-blue-border);
       border-radius: 12px;
-      padding: 0.9rem 1.2rem;
+      padding: 0.9rem 1.25rem;
       gap: 1.25rem;
-      box-shadow: 0 12px 30px rgba(10, 5, 22, 0.45);
+      box-shadow: 0 12px 28px rgba(26, 12, 54, 0.22);
     }
 
     .telemetry-item {
       padding-right: 1.25rem;
-      border-right: 1px solid rgba(25, 13, 51, 0.16);
+      border-right: 1px solid rgba(247, 241, 227, 0.2);
     }
 
     .telemetry-item:last-child {
@@ -257,7 +267,7 @@
       font-family: var(--font-mono);
       font-size: 0.72rem;
       font-weight: 600;
-      color: #4c3575;
+      color: var(--moon-blue);
       text-transform: uppercase;
     }
 
@@ -265,21 +275,21 @@
       font-family: var(--font-mono);
       font-size: 0.95rem;
       font-weight: 800;
-      color: var(--violet-ink);
+      color: var(--bg-cream-surface);
       margin-top: 0.15rem;
     }
 
-    /* Warm Cream + Violet Manifesto Panel */
+    /* Royal Violet Manifesto Panel on Cream Page */
     .manifesto-card {
       inline-size: 100%;
       margin-top: 1.35rem;
-      background: linear-gradient(135deg, var(--cream-pure) 0%, var(--cream-warm) 100%);
-      color: var(--violet-ink);
-      border: 2px solid var(--moon-blue);
-      border-left: 6px solid var(--toxic-green);
+      background: linear-gradient(135deg, var(--violet-deep) 0%, var(--violet-royal) 100%);
+      color: var(--bg-cream-surface);
+      border: 2px solid var(--moon-blue-border);
+      border-left: 7px solid var(--toxic-green);
       border-radius: 14px;
-      padding: 1.5rem 1.85rem;
-      box-shadow: 0 16px 40px rgba(9, 4, 20, 0.5);
+      padding: 1.55rem 1.9rem;
+      box-shadow: 0 16px 36px rgba(26, 12, 54, 0.22);
     }
 
     .manifesto-quote {
@@ -287,14 +297,14 @@
       font-size: clamp(1.08rem, 1rem + 0.35vw, 1.28rem);
       font-style: italic;
       font-weight: 500;
-      color: var(--violet-ink);
+      color: var(--bg-cream-surface);
       line-height: 1.62;
     }
 
     .manifesto-caption {
-      margin-top: 0.85rem;
+      margin-top: 0.9rem;
       padding-top: 0.75rem;
-      border-top: 1px solid rgba(25, 13, 51, 0.15);
+      border-top: 1px solid rgba(247, 241, 227, 0.18);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -302,16 +312,16 @@
       gap: 0.5rem;
       font-family: var(--font-mono);
       font-size: 0.74rem;
-      color: #3b2366;
+      color: var(--moon-blue);
     }
 
     /* Section 1: Active Lecture Theater & Companion Monograph Dossier */
     .theater-shell {
-      background: var(--bg-violet-surface);
-      border: 1px solid var(--border-cream-strong);
+      background: var(--bg-cream-surface);
+      border: 2px solid var(--violet-deep);
       border-radius: 18px;
       padding: clamp(1.25rem, 2.5vw, 2rem);
-      box-shadow: 0 24px 55px rgba(8, 3, 18, 0.6);
+      box-shadow: 8px 8px 0px var(--violet-deep);
     }
 
     .theater-topbar {
@@ -322,7 +332,7 @@
       gap: 0.75rem;
       padding-bottom: 1rem;
       margin-bottom: 1.35rem;
-      border-bottom: 1px solid var(--border-cream);
+      border-bottom: 1.5px solid var(--border-violet);
     }
 
     .theater-grid {
@@ -337,14 +347,14 @@
       }
     }
 
-    /* 16:9 Vlog Stage */
+    /* 16:9 Deep Violet Blackboard Vlog Stage */
     .video-stage {
       aspect-ratio: 16 / 9;
       inline-size: 100%;
       background:
-        radial-gradient(circle at 50% 25%, rgba(139, 224, 255, 0.14), transparent 65%),
-        linear-gradient(180deg, #120926 0%, #1c103b 100%);
-      border: 1.5px solid var(--border-moon);
+        radial-gradient(circle at 50% 25%, rgba(125, 211, 252, 0.18), transparent 65%),
+        linear-gradient(180deg, #160a2e 0%, #24124a 100%);
+      border: 2px solid var(--violet-deep);
       border-radius: 14px;
       padding: 1.35rem;
       display: flex;
@@ -352,7 +362,7 @@
       justify-content: space-between;
       position: relative;
       overflow: clip;
-      box-shadow: inset 0 0 60px rgba(6, 2, 14, 0.75);
+      box-shadow: inset 0 0 50px rgba(8, 3, 18, 0.75);
     }
 
     .blackboard-center {
@@ -377,30 +387,30 @@
       font-family: var(--font-serif);
       font-size: clamp(1.15rem, 1rem + 0.75vw, 1.62rem);
       font-weight: 600;
-      color: var(--cream-pure);
+      color: var(--bg-cream-surface);
       max-inline-size: 46ch;
       line-height: 1.3;
     }
 
     .blackboard-math {
-      background: rgba(20, 11, 41, 0.9);
-      border: 1px solid var(--border-moon);
+      background: rgba(20, 9, 41, 0.92);
+      border: 1.5px solid var(--moon-blue-border);
       border-radius: 10px;
       padding: 0.65rem 1.15rem;
       font-size: 0.92rem;
-      color: var(--cream-pure);
+      color: var(--bg-cream-surface);
       max-inline-size: 100%;
       overflow-x: auto;
-      box-shadow: 0 0 22px rgba(139, 224, 255, 0.12);
+      box-shadow: 0 0 22px rgba(125, 211, 252, 0.18);
     }
 
     .play-lecture-btn {
       font-family: var(--font-mono);
       font-size: 0.78rem;
       font-weight: 800;
-      color: var(--violet-ink);
+      color: var(--violet-deep);
       background: var(--toxic-green);
-      border: 1px solid var(--toxic-green);
+      border: 1.5px solid var(--toxic-green);
       padding: 0.55rem 1.4rem;
       border-radius: 999px;
       cursor: pointer;
@@ -415,7 +425,7 @@
     .scrubber-track {
       inline-size: 100%;
       block-size: 6px;
-      background: rgba(251, 246, 236, 0.14);
+      background: rgba(247, 241, 227, 0.18);
       border-radius: 999px;
       overflow: clip;
     }
@@ -435,25 +445,26 @@
 
     .chapter-btn {
       text-align: left;
-      background: var(--bg-violet-elevated);
-      border: 1px solid var(--border-cream);
+      background: var(--bg-cream-surface);
+      border: 1.5px solid var(--border-violet);
       border-radius: 8px;
       padding: 0.65rem 0.8rem;
-      color: var(--cream-pure);
+      color: var(--violet-deep);
       cursor: pointer;
       transition: all 0.18s ease;
     }
 
     .chapter-btn:hover,
     .chapter-btn.active {
-      border-color: var(--moon-blue);
-      background: var(--moon-blue-tint);
+      background: var(--violet-deep);
+      color: var(--bg-cream-surface);
+      border-color: var(--moon-blue-border);
     }
 
-    /* Right Column: Synchronized Academic Dossier (Cream & Violet Elegance) */
+    /* Right Column: Synchronized Academic Dossier on Warm Cream Paper */
     .dossier-panel {
-      background: var(--bg-violet-elevated);
-      border: 1px solid var(--border-cream-strong);
+      background: var(--bg-cream-canvas);
+      border: 1.5px solid var(--border-violet-strong);
       border-radius: 14px;
       padding: 1.35rem;
       display: flex;
@@ -465,24 +476,24 @@
       overscroll-behavior: contain;
     }
 
-    /* Warm Cream Theorem Card inside Dossier */
+    /* Deep Violet Theorem Card inside Cream Dossier */
     .theorem-box {
-      background: var(--cream-pure);
-      color: var(--violet-ink);
-      border-left: 4px solid var(--toxic-green);
-      border-top: 1px solid var(--border-moon);
-      border-right: 1px solid var(--border-moon);
-      border-bottom: 1px solid var(--border-moon);
+      background: var(--violet-deep);
+      color: var(--bg-cream-surface);
+      border-left: 5px solid var(--toxic-green);
+      border-top: 1px solid var(--moon-blue-border);
+      border-right: 1px solid var(--moon-blue-border);
+      border-bottom: 1px solid var(--moon-blue-border);
       border-radius: 0 10px 10px 0;
       padding: 0.9rem 1.05rem;
       margin-block: 0.9rem;
-      box-shadow: 0 6px 18px rgba(12, 5, 26, 0.3);
+      box-shadow: 0 6px 18px rgba(26, 12, 54, 0.16);
     }
 
     .friction-box {
-      background: rgba(251, 246, 236, 0.06);
-      border: 1px solid var(--border-cream);
-      border-left: 3px solid var(--moon-blue);
+      background: var(--bg-cream-surface);
+      border: 1px solid var(--border-violet);
+      border-left: 4px solid var(--violet-royal);
       border-radius: 8px;
       padding: 0.85rem 1rem;
       margin-block: 0.85rem;
@@ -490,7 +501,7 @@
 
     .ai-audit-box {
       background: var(--moon-blue-tint);
-      border: 1px solid var(--border-moon);
+      border: 1.5px solid var(--moon-blue-border);
       border-radius: 8px;
       padding: 0.85rem 1rem;
     }
@@ -507,22 +518,21 @@
     .filter-btn {
       font-family: var(--font-mono);
       font-size: 0.76rem;
-      font-weight: 600;
+      font-weight: 700;
       padding: 0.45rem 0.9rem;
       border-radius: 8px;
-      background: var(--bg-violet-surface);
-      color: var(--cream-warm);
-      border: 1px solid var(--border-cream);
+      background: var(--bg-cream-surface);
+      color: var(--violet-deep);
+      border: 1.5px solid var(--border-violet-strong);
       cursor: pointer;
       transition: all 0.18s ease;
     }
 
     .filter-btn.active,
     .filter-btn:hover {
-      background: var(--toxic-green);
-      color: var(--violet-ink);
-      border-color: var(--toxic-green);
-      font-weight: 700;
+      background: var(--violet-deep);
+      color: var(--toxic-green);
+      border-color: var(--violet-deep);
     }
 
     .episode-grid {
@@ -537,25 +547,26 @@
       display: grid;
       grid-template-rows: auto auto 1fr auto;
       grid-template-rows: subgrid;
-      background: var(--bg-violet-surface);
-      border: 1px solid var(--border-cream);
+      background: var(--bg-cream-surface);
+      border: 2px solid var(--violet-deep);
       border-radius: 14px;
       overflow: clip;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      box-shadow: 5px 5px 0px var(--violet-deep);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .episode-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--moon-blue);
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0px var(--violet-deep);
     }
 
     .episode-thumb {
       aspect-ratio: 16 / 9;
       inline-size: 100%;
       background:
-        radial-gradient(circle at 50% 40%, rgba(139, 224, 255, 0.14), transparent 70%),
-        linear-gradient(145deg, #160c2e 0%, #27174d 100%);
-      border-bottom: 1px solid var(--border-cream);
+        radial-gradient(circle at 50% 40%, rgba(125, 211, 252, 0.18), transparent 70%),
+        linear-gradient(145deg, #180b33 0%, #2a1554 100%);
+      border-bottom: 2px solid var(--violet-deep);
       padding: 0.9rem;
       display: flex;
       flex-direction: column;
@@ -563,24 +574,24 @@
       overflow: clip;
     }
 
-    /* Doctoral Syllabus Accordions */
+    /* Doctoral Syllabus Accordions on Cream */
     details.syllabus-accordion {
-      background: var(--bg-violet-surface);
-      border: 1px solid var(--border-cream);
+      background: var(--bg-cream-surface);
+      border: 1.5px solid var(--border-violet-strong);
       border-radius: 12px;
       padding: 1rem 1.25rem;
-      transition: border-color 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     details.syllabus-accordion[open] {
-      border-color: var(--moon-blue);
-      background: var(--bg-violet-elevated);
+      border: 2px solid var(--violet-deep);
+      box-shadow: 5px 5px 0px var(--violet-deep);
     }
 
     details.syllabus-accordion > summary {
       cursor: pointer;
       font-weight: 700;
-      color: var(--cream-pure);
+      color: var(--violet-deep);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -589,19 +600,19 @@
     }
 
     dialog.academic-modal {
-      background: var(--bg-violet-surface);
-      color: var(--cream-pure);
-      border: 2px solid var(--moon-blue);
+      background: var(--bg-cream-surface);
+      color: var(--violet-deep);
+      border: 2px solid var(--violet-deep);
       border-radius: 16px;
       padding: 1.75rem;
       max-inline-size: 640px;
       inline-size: 92%;
       margin: auto;
-      box-shadow: 0 25px 60px rgba(5, 2, 12, 0.85);
+      box-shadow: 10px 10px 0px var(--violet-deep);
     }
 
     dialog.academic-modal::backdrop {
-      background: rgba(12, 6, 26, 0.8);
+      background: rgba(26, 12, 54, 0.72);
       backdrop-filter: blur(4px);
     }
   </style>
@@ -659,19 +670,19 @@
           </div>
           <div class="telemetry-item">
             <dt class="telemetry-label">Proof Standard</dt>
-            <dd class="telemetry-val" style="color: #0e6b00;">✓ Unfiltered</dd>
+            <dd class="telemetry-val" style="color: var(--toxic-green);">✓ Unfiltered</dd>
           </div>
         </dl>
       </div>
 
-      <!-- ISTIGNET MISSION STATEMENT MANIFESTO (WARM CREAM SURFACE ON VIOLET) -->
+      <!-- ISTIGNET MISSION STATEMENT MANIFESTO (DEEP VIOLET CARD ON CREAM CANVAS) -->
       <figure id="mission-manifesto" class="manifesto-card">
         <blockquote cite="https://github.com/mormontx/Istignet" class="manifesto-quote">
           <p>“Our mission is to bypass the artificial filters of traditional education and connect learners directly to the boundless intelligence of the global community. We believe that knowledge, much like the Mind at Large, should never be confined, rationed, or gated by proprietary walls. We are building a decentralized, open-source ecosystem where information flows freely, empowering every individual to tap into the unadulterated reality of collective human discovery and contribute to a limitless shared consciousness.”</p>
         </blockquote>
         <figcaption class="manifesto-caption">
-          <span>— FOUNDING MISSION STATEMENT OF <cite style="font-style: normal; font-weight: 800; color: var(--violet-ink);">ISTIGNET (Istigkeit + Network)</cite></span>
-          <span>EPISTEMIC REFERENCE: <cite style="font-weight: 700;">The Doors of Perception</cite> (Aldous Huxley / Meister Eckhart’s <em>Istigkeit</em>)</span>
+          <span>— FOUNDING MISSION STATEMENT OF <cite style="font-style: normal; font-weight: 800; color: var(--toxic-green);">ISTIGNET (Istigkeit + Network)</cite></span>
+          <span>EPISTEMIC REFERENCE: <cite style="font-weight: 700; color: var(--bg-cream-surface);">The Doors of Perception</cite> (Aldous Huxley / Meister Eckhart’s <em>Istigkeit</em>)</span>
         </figcaption>
       </figure>
     </section>
@@ -681,11 +692,11 @@
       <div class="theater-topbar">
         <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
           <span id="active-ep-code" class="issn-badge">VOL. I — LECTURE 03</span>
-          <h2 id="theater-title" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--cream-warm); text-transform: uppercase; letter-spacing: 0.06em;">
+          <h2 id="theater-title" style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--violet-royal); text-transform: uppercase; letter-spacing: 0.06em;">
             Featured Vlog Lecture &amp; Synchronized Companion Monograph
           </h2>
         </div>
-        <div style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--moon-blue);">
+        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: var(--moon-blue-ink);">
           <span id="active-ep-date">Recorded: Oct 20, 2026</span> &bull; <span id="active-ep-duration">Duration: 28:15</span>
         </div>
       </div>
@@ -696,10 +707,10 @@
           <figure>
             <div class="video-stage">
               <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem;">
-                <span id="video-stage-badge" style="background: rgba(251, 246, 236, 0.08); color: var(--cream-pure); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid var(--border-cream);">
+                <span id="video-stage-badge" style="background: rgba(255, 253, 247, 0.1); color: var(--bg-cream-surface); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid rgba(255, 253, 247, 0.25);">
                   STAGE I • SHANNON INFORMATION THEORY
                 </span>
-                <span id="video-time-indicator" style="color: var(--toxic-green); background: var(--toxic-green-tint); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid color-mix(in oklab, var(--toxic-green), transparent 55%);">
+                <span id="video-time-indicator" style="color: var(--toxic-green); background: rgba(57, 255, 20, 0.14); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid rgba(57, 255, 20, 0.45);">
                   05:42 / 28:15
                 </span>
               </div>
@@ -723,21 +734,21 @@
                 <div class="scrubber-track">
                   <div id="scrubber-fill" class="scrubber-bar" style="inline-size: 28%;"></div>
                 </div>
-                <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; color: var(--cream-muted);">
+                <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; color: var(--bg-cream-warm);">
                   <span id="scrubber-status">PAUSED • CLICK ANY CHAPTER TIMESTAMP BELOW TO SEEK</span>
                   <span style="color: var(--moon-blue);">1080p60 • BLACKBOARD + CODE WALKTHROUGH</span>
                 </div>
               </div>
             </div>
-            <figcaption style="font-family: var(--font-serif); font-style: italic; font-size: 0.85rem; color: var(--cream-muted); margin-top: 0.45rem; display: flex; justify-content: space-between;">
+            <figcaption style="font-family: var(--font-serif); font-style: italic; font-size: 0.88rem; color: var(--violet-muted); margin-top: 0.45rem; display: flex; justify-content: space-between;">
               <span>Figure 1: Recorded blackboard derivation paired with interactive chapter markers.</span>
-              <span style="font-family: var(--font-mono); font-style: normal; font-size: 0.74rem; color: var(--moon-blue);">[YouTube / MP4 Embed Ready]</span>
+              <span style="font-family: var(--font-mono); font-style: normal; font-weight: 700; font-size: 0.74rem; color: var(--moon-blue-ink);">[YouTube / MP4 Embed Ready]</span>
             </figcaption>
           </figure>
 
           <!-- Interactive Chapter Timestamps -->
-          <div style="background: var(--bg-violet-elevated); border: 1px solid var(--border-cream); border-radius: 12px; padding: 1rem;">
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--moon-blue); text-transform: uppercase; letter-spacing: 0.05em;">
+          <div style="background: var(--bg-cream-canvas); border: 1.5px solid var(--border-violet-strong); border-radius: 12px; padding: 1rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--violet-royal); text-transform: uppercase; letter-spacing: 0.05em;">
               Video Lecture Chapters &amp; Mathematical Checkpoints (Click to Seek)
             </div>
             <div id="chapter-buttons" class="chapter-grid"></div>
@@ -747,57 +758,57 @@
         <!-- RIGHT 5 COLS: ACADEMIC COMPANION DOSSIER -->
         <aside class="dossier-panel" aria-label="Companion Monograph Dossier">
           <div>
-            <div style="border-bottom: 1px solid var(--border-cream); padding-bottom: 0.85rem; margin-bottom: 1rem;">
-              <div id="dossier-module" style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--moon-blue);">
+            <div style="border-bottom: 1.5px solid var(--border-violet); padding-bottom: 0.85rem; margin-bottom: 1rem;">
+              <div id="dossier-module" style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--moon-blue-ink);">
                 MODULE 102 • SHANNON INFORMATION THEORY
               </div>
-              <h3 id="dossier-title" style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; color: var(--cream-pure); line-height: 1.25; margin-top: 0.2rem;">
+              <h3 id="dossier-title" style="font-family: var(--font-serif); font-size: 1.38rem; font-weight: 700; color: var(--violet-deep); line-height: 1.25; margin-top: 0.2rem;">
                 Surprisal, Additivity, and Why Shannon Entropy Must Be Logarithmic
               </h3>
             </div>
 
             <div>
-              <h4 style="font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase; color: var(--cream-muted); margin-bottom: 0.3rem;">
+              <h4 style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; text-transform: uppercase; color: var(--violet-muted); margin-bottom: 0.3rem;">
                 1. Lecture Abstract
               </h4>
-              <p id="dossier-abstract" style="font-family: var(--font-serif); font-size: 1.02rem; color: var(--cream-warm); line-height: 1.55;"></p>
+              <p id="dossier-abstract" style="font-family: var(--font-serif); font-size: 1.04rem; color: var(--violet-royal); line-height: 1.55;"></p>
             </div>
 
             <div class="theorem-box">
-              <div id="dossier-theorem-label" style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; color: #3b1d70; margin-bottom: 0.25rem;">
+              <div id="dossier-theorem-label" style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; color: var(--toxic-green); margin-bottom: 0.25rem;">
                 THEOREM 1.2 (KHINCHIN UNIQUENESS)
               </div>
-              <div id="dossier-theorem-body" style="font-family: var(--font-serif); font-size: 0.98rem; color: var(--violet-ink); line-height: 1.5;"></div>
+              <div id="dossier-theorem-body" style="font-family: var(--font-serif); font-size: 0.98rem; color: var(--bg-cream-surface); line-height: 1.5;"></div>
             </div>
 
             <div class="friction-box">
-              <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--moon-blue); margin-bottom: 0.25rem;">
+              <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; color: var(--violet-royal); margin-bottom: 0.25rem;">
                 2. EPISTEMIC FRICTION (WHAT BROKE MY INTUITION ON CAMERA)
               </div>
-              <p id="dossier-friction" style="font-size: 0.82rem; color: var(--cream-warm); line-height: 1.5;"></p>
+              <p id="dossier-friction" style="font-size: 0.83rem; color: var(--violet-deep); line-height: 1.5;"></p>
             </div>
 
             <div class="ai-audit-box">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
-                <span style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--toxic-green);">
+                <span style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; color: var(--violet-deep);">
                   3. AI-AGE CURRICULUM AUDIT
                 </span>
-                <span id="dossier-ai-badge" style="font-family: var(--font-mono); font-size: 0.7rem; background: rgba(20, 11, 41, 0.7); color: var(--moon-blue); border: 1px solid var(--border-moon); padding: 0.15rem 0.5rem; border-radius: 4px;">
+                <span id="dossier-ai-badge" style="font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; background: var(--violet-deep); color: var(--toxic-green); padding: 0.15rem 0.55rem; border-radius: 4px;">
                   SOCRATIC REFEREE
                 </span>
               </div>
-              <p id="dossier-ai-audit" style="font-size: 0.82rem; color: var(--cream-pure); line-height: 1.5;"></p>
+              <p id="dossier-ai-audit" style="font-size: 0.83rem; color: var(--violet-deep); line-height: 1.5;"></p>
             </div>
           </div>
 
-          <div style="border-top: 1px solid var(--border-cream); padding-top: 0.9rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.74rem;">
-            <span style="background: var(--bg-violet-surface); border: 1px solid var(--border-cream); color: var(--cream-warm); padding: 0.35rem 0.7rem; border-radius: 6px;">
+          <div style="border-top: 1.5px solid var(--border-violet); padding-top: 0.9rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;">
+            <span style="background: var(--bg-cream-surface); border: 1.5px solid var(--border-violet-strong); color: var(--violet-deep); padding: 0.35rem 0.7rem; border-radius: 6px;">
               📄 LaTeX Companion Monograph
             </span>
-            <span style="background: var(--bg-violet-surface); border: 1px solid var(--border-moon); color: var(--moon-blue); padding: 0.35rem 0.7rem; border-radius: 6px;">
+            <span style="background: var(--moon-blue-tint); border: 1.5px solid var(--moon-blue-border); color: var(--moon-blue-ink); padding: 0.35rem 0.7rem; border-radius: 6px;">
               💻 Simulation Code
             </span>
-            <span style="background: var(--toxic-green-tint); border: 1px solid color-mix(in oklab, var(--toxic-green), transparent 50%); color: var(--toxic-green); padding: 0.35rem 0.7rem; border-radius: 6px;">
+            <span style="background: var(--violet-deep); border: 1.5px solid var(--violet-deep); color: var(--toxic-green); padding: 0.35rem 0.7rem; border-radius: 6px;">
               ✓ Closed-Book Verified
             </span>
           </div>
@@ -807,12 +818,12 @@
 
     <!-- SECTION 2: VLOG EPISODE ARCHIVE -->
     <section id="episode-archive" aria-labelledby="archive-heading" style="display: flex; flex-direction: column; gap: 1.35rem;">
-      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem; border-bottom: 1px solid var(--border-cream); padding-bottom: 1rem;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem; border-bottom: 2px solid var(--violet-deep); padding-bottom: 1rem;">
         <div>
-          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--toxic-green); text-transform: uppercase;">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--moon-blue-ink); text-transform: uppercase;">
             Chronological Lecture Index
           </div>
-          <h2 id="archive-heading" style="font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; color: var(--cream-pure);">
+          <h2 id="archive-heading" style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--violet-deep);">
             Published Vlog Episodes &amp; Research Logs
           </h2>
         </div>
@@ -831,14 +842,14 @@
 
     <!-- SECTION 3: 5-STAGE DOCTORAL QUALIFYING SYLLABUS -->
     <section id="doctoral-syllabus" aria-labelledby="syllabus-heading" style="display: flex; flex-direction: column; gap: 1.15rem;">
-      <div style="border-bottom: 1px solid var(--border-cream); padding-bottom: 0.9rem;">
-        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--moon-blue); text-transform: uppercase;">
+      <div style="border-bottom: 2px solid var(--violet-deep); padding-bottom: 0.9rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--moon-blue-ink); text-transform: uppercase;">
           Self-Directed Doctoral Qualifying Curriculum
         </div>
-        <h2 id="syllabus-heading" style="font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; color: var(--cream-pure);">
+        <h2 id="syllabus-heading" style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--violet-deep);">
           The 5-Stage Information-Theoretic Spine
         </h2>
-        <p style="font-size: 0.88rem; color: var(--cream-warm); max-inline-size: 75ch; margin-top: 0.25rem;">
+        <p style="font-size: 0.9rem; color: var(--violet-royal); max-inline-size: 75ch; margin-top: 0.25rem;">
           Every module bridges classical computer science and Shannon theory directly into quantum computation and quantum information theory.
         </p>
       </div>
@@ -848,18 +859,18 @@
           <span>Stage I — Classical Computation, Reversible Logic &amp; Shannon Information Theory</span>
           <span class="issn-badge">ACTIVE VOLUME • 3 VLOGS FILMED</span>
         </summary>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-cream); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1.5px solid var(--border-violet); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.85rem;">
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--moon-blue); margin-bottom: 0.3rem;">CLASSICAL CORE</div>
-            <p style="color: var(--cream-warm);">Turing machines, Boolean circuit complexity, Landauer's erasure bound ($k_B T \ln 2$), Toffoli/Fredkin reversible logic, Shannon entropy $H(X)$, Kullback-Leibler divergence $D(p\parallel q)$, Noisy Channel Coding Theorem.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--moon-blue-ink); margin-bottom: 0.3rem;">CLASSICAL CORE</div>
+            <p style="color: var(--violet-deep);">Turing machines, Boolean circuit complexity, Landauer's erasure bound ($k_B T \ln 2$), Toffoli/Fredkin reversible logic, Shannon entropy $H(X)$, Kullback-Leibler divergence $D(p\parallel q)$, Noisy Channel Coding Theorem.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--toxic-green); margin-bottom: 0.3rem;">QUANTUM INFORMATION BRIDGE</div>
-            <p style="color: var(--cream-warm);">Why unitary quantum evolution demands reversibility; Bennett's uncomputation trick to clear ancilla garbage before interference; $H(X)$ as the diagonal limit of Von Neumann entropy $S(\rho)$.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--toxic-green-deep); margin-bottom: 0.3rem;">QUANTUM INFORMATION BRIDGE</div>
+            <p style="color: var(--violet-deep);">Why unitary quantum evolution demands reversibility; Bennett's uncomputation trick to clear ancilla garbage before interference; $H(X)$ as the diagonal limit of Von Neumann entropy $S(\rho)$.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--cream-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
-            <p style="color: var(--cream-muted);"><cite>Elements of Information Theory</cite> (Cover &amp; Thomas); <cite>Lectures on Computation</cite> (Feynman); <cite>Information Theory, Inference, and Learning Algorithms</cite> (MacKay).</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--violet-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--violet-muted);"><cite>Elements of Information Theory</cite> (Cover &amp; Thomas); <cite>Lectures on Computation</cite> (Feynman); <cite>Information Theory, Inference, and Learning Algorithms</cite> (MacKay).</p>
           </div>
         </div>
       </details>
@@ -867,20 +878,20 @@
       <details name="curriculum-stage" class="syllabus-accordion">
         <summary>
           <span>Stage II — Finite-Dimensional Hilbert Spaces, Quantum Postulates &amp; Non-Local Games</span>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--moon-blue);">IN RECORDING • 1 VLOG FILMED</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--moon-blue-ink);">IN RECORDING • 1 VLOG FILMED</span>
         </summary>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-cream); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1.5px solid var(--border-violet); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.85rem;">
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--moon-blue); margin-bottom: 0.3rem;">MATHEMATICAL SUBSTRATE</div>
-            <p style="color: var(--cream-warm);">Spectral Theorem for normal operators, Tensor products $\mathcal{H}_A \otimes \mathcal{H}_B$, Singular Value &amp; Schmidt Decomposition, Projective vs. POVM measurements.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--moon-blue-ink); margin-bottom: 0.3rem;">MATHEMATICAL SUBSTRATE</div>
+            <p style="color: var(--violet-deep);">Spectral Theorem for normal operators, Tensor products $\mathcal{H}_A \otimes \mathcal{H}_B$, Singular Value &amp; Schmidt Decomposition, Projective vs. POVM measurements.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--toxic-green); margin-bottom: 0.3rem;">INFORMATION-THEORETIC FOCUS</div>
-            <p style="color: var(--cream-warm);">No-Cloning &amp; No-Signaling duality; Bell inequalities framed as the CHSH cooperative information game (classical $75\%$ vs. Tsirelson $\cos^2(\pi/8) \approx 85.4\%$ quantum limit).</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--toxic-green-deep); margin-bottom: 0.3rem;">INFORMATION-THEORETIC FOCUS</div>
+            <p style="color: var(--violet-deep);">No-Cloning &amp; No-Signaling duality; Bell inequalities framed as the CHSH cooperative information game (classical $75\%$ vs. Tsirelson $\cos^2(\pi/8) \approx 85.4\%$ quantum limit).</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--cream-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
-            <p style="color: var(--cream-muted);"><cite>Quantum Computation and Quantum Information</cite> (Nielsen &amp; Chuang); <cite>The Theory of Quantum Information</cite> (Watrous).</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--violet-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--violet-muted);"><cite>Quantum Computation and Quantum Information</cite> (Nielsen &amp; Chuang); <cite>The Theory of Quantum Information</cite> (Watrous).</p>
           </div>
         </div>
       </details>
@@ -888,20 +899,20 @@
       <details name="curriculum-stage" class="syllabus-accordion">
         <summary>
           <span>Stage III — Quantum Circuits, Oracular Complexity &amp; Algorithmic Speedups</span>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--cream-muted);">UPCOMING VOLUME</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--violet-muted);">UPCOMING VOLUME</span>
         </summary>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-cream); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1.5px solid var(--border-violet); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.85rem;">
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--moon-blue); margin-bottom: 0.3rem;">ALGORITHMIC SPINE</div>
-            <p style="color: var(--cream-warm);">Universal gate sets, Solovay-Kitaev theorem, Phase kickback, Deutsch-Jozsa, Bernstein-Vazirani, Simon's periodicity, QFT, Shor's factoring, Grover's $\mathcal{O}(\sqrt{N})$ optimality proof.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--moon-blue-ink); margin-bottom: 0.3rem;">ALGORITHMIC SPINE</div>
+            <p style="color: var(--violet-deep);">Universal gate sets, Solovay-Kitaev theorem, Phase kickback, Deutsch-Jozsa, Bernstein-Vazirani, Simon's periodicity, QFT, Shor's factoring, Grover's $\mathcal{O}(\sqrt{N})$ optimality proof.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--toxic-green); margin-bottom: 0.3rem;">INFORMATION-THEORETIC FOCUS</div>
-            <p style="color: var(--cream-warm);">Query complexity lower bounds via the hybrid/adversary method; how quantum interference concentrates probability mass without violating Holevo's bound.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--toxic-green-deep); margin-bottom: 0.3rem;">INFORMATION-THEORETIC FOCUS</div>
+            <p style="color: var(--violet-deep);">Query complexity lower bounds via the hybrid/adversary method; how quantum interference concentrates probability mass without violating Holevo's bound.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--cream-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
-            <p style="color: var(--cream-muted);"><cite>Quantum Computing Since Democritus</cite> (Aaronson); <cite>Classical and Quantum Computation</cite> (Kitaev, Shen &amp; Vyalyi).</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--violet-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--violet-muted);"><cite>Quantum Computing Since Democritus</cite> (Aaronson); <cite>Classical and Quantum Computation</cite> (Kitaev, Shen &amp; Vyalyi).</p>
           </div>
         </div>
       </details>
@@ -909,20 +920,20 @@
       <details name="curriculum-stage" class="syllabus-accordion">
         <summary>
           <span>Stage IV — Quantum Information Theory: Channels, Entropy &amp; Entanglement Resource Theory</span>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--toxic-green);">CORE DOCTORAL CONCENTRATION</span>
+          <span class="issn-badge">CORE DOCTORAL CONCENTRATION</span>
         </summary>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-cream); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1.5px solid var(--border-violet); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.85rem;">
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--moon-blue); margin-bottom: 0.3rem;">OPEN SYSTEMS &amp; ENTROPY</div>
-            <p style="color: var(--cream-warm);">Density operators $\rho$, Purifications, CPTP Quantum Channels, Kraus &amp; Stinespring Dilation, Von Neumann Entropy $S(\rho) = -\operatorname{Tr}(\rho \log_2 \rho)$, Strong Subadditivity.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--moon-blue-ink); margin-bottom: 0.3rem;">OPEN SYSTEMS &amp; ENTROPY</div>
+            <p style="color: var(--violet-deep);">Density operators $\rho$, Purifications, CPTP Quantum Channels, Kraus &amp; Stinespring Dilation, Von Neumann Entropy $S(\rho) = -\operatorname{Tr}(\rho \log_2 \rho)$, Strong Subadditivity.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--toxic-green); margin-bottom: 0.3rem;">CAPACITIES &amp; ENTANGLEMENT</div>
-            <p style="color: var(--cream-warm);">Accessible information &amp; Holevo's Bound $\chi$, Schumacher quantum source coding, HSW classical capacity, Quantum capacity $Q$, LOCC &amp; Entanglement Distillation.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--toxic-green-deep); margin-bottom: 0.3rem;">CAPACITIES &amp; ENTANGLEMENT</div>
+            <p style="color: var(--violet-deep);">Accessible information &amp; Holevo's Bound $\chi$, Schumacher quantum source coding, HSW classical capacity, Quantum capacity $Q$, LOCC &amp; Entanglement Distillation.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--cream-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
-            <p style="color: var(--cream-muted);"><cite>Quantum Information Theory</cite> (Mark Wilde); <cite>The Theory of Quantum Information</cite> (John Watrous); Preskill Lecture Notes.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--violet-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--violet-muted);"><cite>Quantum Information Theory</cite> (Mark Wilde); <cite>The Theory of Quantum Information</cite> (John Watrous); Preskill Lecture Notes.</p>
           </div>
         </div>
       </details>
@@ -930,20 +941,20 @@
       <details name="curriculum-stage" class="syllabus-accordion">
         <summary>
           <span>Stage V — Quantum Error Correction, Complexity Theory (BQP / QMA) &amp; Thesis Monograph</span>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--cream-muted);">CAPSTONE STAGE</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--violet-muted);">CAPSTONE STAGE</span>
         </summary>
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-cream); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1.5px solid var(--border-violet); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.85rem;">
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--moon-blue); margin-bottom: 0.3rem;">FAULT TOLERANCE</div>
-            <p style="color: var(--cream-warm);">Pauli Stabilizer Formalism, Gottesman-Knill Theorem, Shor 9-qubit &amp; Steane 7-qubit codes, Topological Surface Codes, Fault-Tolerant Threshold Theorem.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--moon-blue-ink); margin-bottom: 0.3rem;">FAULT TOLERANCE</div>
+            <p style="color: var(--violet-deep);">Pauli Stabilizer Formalism, Gottesman-Knill Theorem, Shor 9-qubit &amp; Steane 7-qubit codes, Topological Surface Codes, Fault-Tolerant Threshold Theorem.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--toxic-green); margin-bottom: 0.3rem;">QUANTUM COMPLEXITY</div>
-            <p style="color: var(--cream-warm);">$\text{BQP}$ vs $\text{PP}$, $\text{QMA}$-Completeness of the $k$-Local Hamiltonian Problem (quantum Cook-Levin), Device-Independent QKD.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--toxic-green-deep); margin-bottom: 0.3rem;">QUANTUM COMPLEXITY</div>
+            <p style="color: var(--violet-deep);">$\text{BQP}$ vs $\text{PP}$, $\text{QMA}$-Completeness of the $k$-Local Hamiltonian Problem (quantum Cook-Levin), Device-Independent QKD.</p>
           </div>
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--cream-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
-            <p style="color: var(--cream-muted);"><cite>Stabilizer Codes and Quantum Error Correction</cite> (Gottesman PhD Thesis); <cite>Quantum Hamiltonian Complexity</cite> (Gharibian et al.).</p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--violet-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--violet-muted);"><cite>Stabilizer Codes and Quantum Error Correction</cite> (Gottesman PhD Thesis); <cite>Quantum Hamiltonian Complexity</cite> (Gharibian et al.).</p>
           </div>
         </div>
       </details>
@@ -953,20 +964,20 @@
 
   <!-- MODAL FOR PUBLISHING WORKFLOW -->
   <dialog id="publish-modal" closedby="any" class="academic-modal">
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-cream); padding-bottom: 0.85rem; margin-bottom: 1rem;">
-      <h2 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--cream-pure);">Update-As-You-Go Vlog Publishing Workflow</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border-violet); padding-bottom: 0.85rem; margin-bottom: 1rem;">
+      <h2 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--violet-deep);">Update-As-You-Go Vlog Publishing Workflow</h2>
       <form method="dialog">
-        <button style="background: var(--bg-violet-elevated); color: var(--cream-pure); border: 1px solid var(--border-cream); padding: 0.3rem 0.65rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">✕ ESC</button>
+        <button style="background: var(--violet-deep); color: var(--bg-cream-surface); border: 1px solid var(--violet-deep); padding: 0.3rem 0.65rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">✕ ESC</button>
       </form>
     </div>
-    <p style="font-size: 0.85rem; color: var(--cream-warm); margin-bottom: 1rem;">
+    <p style="font-size: 0.85rem; color: var(--violet-royal); margin-bottom: 1rem;">
       Each time you film a study vlog, add a single entry block to <code>data/qit-vlogs.json</code> (or ask Antigravity to log it for you). MathJax equations, chapter seek buttons, and syllabus counters update automatically:
     </p>
     <figure style="margin-bottom: 1.25rem;">
-      <figcaption style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--toxic-green); margin-bottom: 0.35rem;">
+      <figcaption style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--moon-blue-ink); margin-bottom: 0.35rem;">
         data/qit-vlogs.json schema:
       </figcaption>
-      <pre tabindex="0" style="background: var(--bg-violet-deep); border: 1px solid var(--border-moon); border-radius: 10px; padding: 1rem; font-family: var(--font-mono); font-size: 0.75rem; overflow-x-auto; color: var(--cream-pure);"><code>{
+      <pre tabindex="0" style="background: var(--violet-deep); border: 1.5px solid var(--moon-blue-border); border-radius: 10px; padding: 1rem; font-family: var(--font-mono); font-size: 0.75rem; overflow-x-auto; color: var(--bg-cream-surface);"><code>{
   "id": "ep-05",
   "code": "VOL. I — LECTURE 05",
   "stage": "STAGE I",
@@ -1113,11 +1124,11 @@
       const chEl = document.getElementById('chapter-buttons');
       chEl.innerHTML = found.chapters.map((ch, idx) => `
         <button type="button" id="ch-btn-${idx}" class="chapter-btn" onclick="seekChapter(${idx})">
-          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; color: var(--toxic-green);">
+          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--toxic-green-deep);">
             <span>▶ ${ch.time}</span>
-            <span style="color: var(--moon-blue);">Ch. 0${idx + 1}</span>
+            <span style="color: var(--moon-blue-ink);">Ch. 0${idx + 1}</span>
           </div>
-          <div style="font-size: 0.78rem; font-weight: 600; margin-top: 0.2rem; color: var(--cream-pure);">${ch.label}</div>
+          <div style="font-size: 0.78rem; font-weight: 700; margin-top: 0.2rem;">${ch.label}</div>
         </button>
       `).join('');
 
@@ -1164,9 +1175,9 @@
           <div class="episode-thumb">
             <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem;">
               <span style="color: var(--toxic-green); font-weight: 700;">${ep.code}</span>
-              <span style="background: rgba(20, 11, 41, 0.75); color: var(--cream-pure); border: 1px solid var(--border-moon); padding: 0.1rem 0.45rem; border-radius: 4px;">⏱ ${ep.duration}</span>
+              <span style="background: rgba(20, 11, 41, 0.78); color: var(--bg-cream-surface); border: 1px solid var(--moon-blue-border); padding: 0.1rem 0.45rem; border-radius: 4px;">⏱ ${ep.duration}</span>
             </div>
-            <div style="margin-block: auto; text-align: center; font-size: 0.9rem; color: var(--cream-pure);">
+            <div style="margin-block: auto; text-align: center; font-size: 0.9rem; color: var(--bg-cream-surface);">
               ${ep.thumbEq}
             </div>
             <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--moon-blue);">
@@ -1176,18 +1187,18 @@
           </div>
 
           <div style="padding: 1rem 1.15rem 0.25rem;">
-            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--moon-blue);">${ep.module}</div>
-            <h3 style="font-family: var(--font-serif); font-size: 1.18rem; font-weight: 700; color: var(--cream-pure); line-height: 1.25; margin-top: 0.2rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; color: var(--moon-blue-ink);">${ep.module}</div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--violet-deep); line-height: 1.25; margin-top: 0.2rem;">
               ${ep.title}
             </h3>
           </div>
 
           <div style="padding: 0.5rem 1.15rem 0.85rem;">
-            <p style="font-size: 0.8rem; color: var(--cream-warm); line-height: 1.5;">${ep.abstract}</p>
+            <p style="font-size: 0.82rem; color: var(--violet-royal); line-height: 1.5;">${ep.abstract}</p>
           </div>
 
-          <div style="padding: 0.75rem 1.15rem 1rem; border-top: 1px solid var(--border-cream); display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--toxic-green);">✓ Proof + AI Audit</span>
+          <div style="padding: 0.75rem 1.15rem 1rem; border-top: 1.5px solid var(--border-violet); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--toxic-green-deep);">✓ Proof + AI Audit</span>
             <button type="button" class="nav-btn-primary" onclick="loadEpisode('${ep.id}'); document.getElementById('lecture-theater').scrollIntoView({behavior: 'smooth'});">
               ▶ Watch &amp; Open Dossier
             </button>
