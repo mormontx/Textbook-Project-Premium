@@ -43,9 +43,16 @@
       --toxic-green-tint: color-mix(in oklab, var(--toxic-green), transparent 82%);
 
       --moon-blue: #7dd3fc;
-      --moon-blue-ink: #035388;
-      --moon-blue-border: #38bdf8;
-      --moon-blue-tint: color-mix(in oklab, var(--moon-blue), transparent 78%);
+      --moon-blue-ink: #5e355b;
+      --moon-blue-border: #c98fb9;
+      --moon-blue-tint: #efddea;
+
+      /* Ash Pink / Ash Purple Frame Palette */
+      --ash-purple-deep: #4e2f4b;
+      --ash-purple-royal: #633d60;
+      --ash-pink-surface: #efddea;
+      --ash-pink-border: #c98fb9;
+      --ash-pink-light: #f5e4f0;
 
       --border-violet: color-mix(in oklab, var(--violet-deep), transparent 82%);
       --border-violet-strong: color-mix(in oklab, var(--violet-deep), transparent 68%);
@@ -110,12 +117,12 @@
       font-size: 0.75rem;
       font-weight: 700;
       color: var(--toxic-green);
-      background: var(--violet-deep);
-      border: 1.5px solid var(--moon-blue-border);
+      background: linear-gradient(135deg, var(--ash-purple-deep) 0%, var(--ash-purple-royal) 100%);
+      border: 1.5px solid var(--ash-pink-border);
       padding: 0.25rem 0.75rem;
       border-radius: 6px;
       letter-spacing: 0.04em;
-      box-shadow: 0 2px 10px rgba(26, 12, 54, 0.18);
+      box-shadow: 0 2px 10px rgba(78, 47, 75, 0.22);
     }
 
     .series-label {
@@ -240,22 +247,22 @@
       color: var(--violet-deep);
     }
 
-    /* Deep Violet Telemetry Box on Cream Canvas */
+    /* Ash Pink / Ash Purple Telemetry Box on Cream Canvas */
     .telemetry-box {
       display: grid;
       grid-template-columns: repeat(3, auto);
-      background: var(--violet-deep);
+      background: linear-gradient(135deg, var(--ash-purple-deep) 0%, var(--ash-purple-royal) 100%);
       color: var(--bg-cream-surface);
-      border: 2px solid var(--moon-blue-border);
+      border: 2px solid var(--ash-pink-border);
       border-radius: 12px;
       padding: 0.9rem 1.25rem;
       gap: 1.25rem;
-      box-shadow: 0 12px 28px rgba(26, 12, 54, 0.22);
+      box-shadow: 0 12px 28px rgba(78, 47, 75, 0.24);
     }
 
     .telemetry-item {
       padding-right: 1.25rem;
-      border-right: 1px solid rgba(247, 241, 227, 0.2);
+      border-right: 1px solid rgba(245, 228, 240, 0.24);
     }
 
     .telemetry-item:last-child {
@@ -267,7 +274,7 @@
       font-family: var(--font-mono);
       font-size: 0.72rem;
       font-weight: 600;
-      color: var(--moon-blue);
+      color: var(--ash-pink-light);
       text-transform: uppercase;
     }
 
@@ -279,17 +286,17 @@
       margin-top: 0.15rem;
     }
 
-    /* Royal Violet Manifesto Panel on Cream Page */
+    /* Ash Purple Manifesto Panel on Cream Page */
     .manifesto-card {
       inline-size: 100%;
       margin-top: 1.35rem;
-      background: linear-gradient(135deg, var(--violet-deep) 0%, var(--violet-royal) 100%);
+      background: linear-gradient(135deg, var(--ash-purple-deep) 0%, var(--ash-purple-royal) 100%);
       color: var(--bg-cream-surface);
-      border: 2px solid var(--moon-blue-border);
+      border: 2px solid var(--ash-pink-border);
       border-left: 7px solid var(--toxic-green);
       border-radius: 14px;
       padding: 1.55rem 1.9rem;
-      box-shadow: 0 16px 36px rgba(26, 12, 54, 0.22);
+      box-shadow: 0 16px 36px rgba(78, 47, 75, 0.24);
     }
 
     .manifesto-quote {
@@ -304,7 +311,7 @@
     .manifesto-caption {
       margin-top: 0.9rem;
       padding-top: 0.75rem;
-      border-top: 1px solid rgba(247, 241, 227, 0.18);
+      border-top: 1px solid rgba(245, 228, 240, 0.22);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -312,7 +319,7 @@
       gap: 0.5rem;
       font-family: var(--font-mono);
       font-size: 0.74rem;
-      color: var(--moon-blue);
+      color: var(--ash-pink-light);
     }
 
     /* Section 1: Active Lecture Theater & Companion Monograph Dossier */
@@ -347,14 +354,14 @@
       }
     }
 
-    /* 16:9 Deep Violet Blackboard Vlog Stage */
+    /* 16:9 Ash Purple & Violet Blackboard Vlog Stage */
     .video-stage {
       aspect-ratio: 16 / 9;
       inline-size: 100%;
       background:
-        radial-gradient(circle at 50% 25%, rgba(125, 211, 252, 0.18), transparent 65%),
-        linear-gradient(180deg, #160a2e 0%, #24124a 100%);
-      border: 2px solid var(--violet-deep);
+        radial-gradient(circle at 50% 25%, rgba(216, 167, 202, 0.24), transparent 65%),
+        linear-gradient(180deg, #241224 0%, #381d38 100%);
+      border: 2px solid var(--ash-purple-deep);
       border-radius: 14px;
       padding: 1.35rem;
       display: flex;
@@ -362,7 +369,7 @@
       justify-content: space-between;
       position: relative;
       overflow: clip;
-      box-shadow: inset 0 0 50px rgba(8, 3, 18, 0.75);
+      box-shadow: inset 0 0 50px rgba(18, 6, 18, 0.72);
     }
 
     .blackboard-center {
@@ -380,7 +387,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--moon-blue);
+      color: var(--ash-pink-light);
     }
 
     .blackboard-heading {
@@ -393,15 +400,15 @@
     }
 
     .blackboard-math {
-      background: rgba(20, 9, 41, 0.92);
-      border: 1.5px solid var(--moon-blue-border);
+      background: linear-gradient(135deg, rgba(86, 51, 83, 0.9) 0%, rgba(62, 35, 61, 0.94) 100%);
+      border: 1.5px solid var(--ash-pink-border);
       border-radius: 10px;
       padding: 0.65rem 1.15rem;
       font-size: 0.92rem;
       color: var(--bg-cream-surface);
       max-inline-size: 100%;
       overflow-x: auto;
-      box-shadow: 0 0 22px rgba(125, 211, 252, 0.18);
+      box-shadow: 0 0 22px rgba(201, 143, 185, 0.25);
     }
 
     .play-lecture-btn {
@@ -476,32 +483,32 @@
       overscroll-behavior: contain;
     }
 
-    /* Deep Violet Theorem Card inside Cream Dossier */
+    /* Ash Purple Theorem Card inside Cream Dossier */
     .theorem-box {
-      background: var(--violet-deep);
+      background: linear-gradient(135deg, var(--ash-purple-deep) 0%, var(--ash-purple-royal) 100%);
       color: var(--bg-cream-surface);
       border-left: 5px solid var(--toxic-green);
-      border-top: 1px solid var(--moon-blue-border);
-      border-right: 1px solid var(--moon-blue-border);
-      border-bottom: 1px solid var(--moon-blue-border);
+      border-top: 1px solid var(--ash-pink-border);
+      border-right: 1px solid var(--ash-pink-border);
+      border-bottom: 1px solid var(--ash-pink-border);
       border-radius: 0 10px 10px 0;
       padding: 0.9rem 1.05rem;
       margin-block: 0.9rem;
-      box-shadow: 0 6px 18px rgba(26, 12, 54, 0.16);
+      box-shadow: 0 6px 18px rgba(78, 47, 75, 0.2);
     }
 
     .friction-box {
       background: var(--bg-cream-surface);
       border: 1px solid var(--border-violet);
-      border-left: 4px solid var(--violet-royal);
+      border-left: 4px solid var(--ash-purple-royal);
       border-radius: 8px;
       padding: 0.85rem 1rem;
       margin-block: 0.85rem;
     }
 
     .ai-audit-box {
-      background: var(--moon-blue-tint);
-      border: 1.5px solid var(--moon-blue-border);
+      background: var(--ash-pink-surface);
+      border: 1.5px solid var(--ash-pink-border);
       border-radius: 8px;
       padding: 0.85rem 1rem;
     }
@@ -564,9 +571,9 @@
       aspect-ratio: 16 / 9;
       inline-size: 100%;
       background:
-        radial-gradient(circle at 50% 40%, rgba(125, 211, 252, 0.18), transparent 70%),
-        linear-gradient(145deg, #180b33 0%, #2a1554 100%);
-      border-bottom: 2px solid var(--violet-deep);
+        radial-gradient(circle at 50% 40%, rgba(216, 167, 202, 0.24), transparent 70%),
+        linear-gradient(145deg, #2a1529 0%, #442442 100%);
+      border-bottom: 2px solid var(--ash-purple-deep);
       padding: 0.9rem;
       display: flex;
       flex-direction: column;
@@ -707,7 +714,7 @@
           <figure>
             <div class="video-stage">
               <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem;">
-                <span id="video-stage-badge" style="background: rgba(255, 253, 247, 0.1); color: var(--bg-cream-surface); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid rgba(255, 253, 247, 0.25);">
+                <span id="video-stage-badge" style="background: rgba(201, 143, 185, 0.22); color: var(--ash-pink-light); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid var(--ash-pink-border);">
                   STAGE I • SHANNON INFORMATION THEORY
                 </span>
                 <span id="video-time-indicator" style="color: var(--toxic-green); background: rgba(57, 255, 20, 0.14); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid rgba(57, 255, 20, 0.45);">
