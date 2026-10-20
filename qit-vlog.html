@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Information Theory — Doctoral Vlog &amp; Curriculum Monograph | Tuğcan Yıldırım</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- MathJax 3 for Publication-Grade LaTeX Equations -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+  <style>
+    :root {
+      --bg-canvas: #070a12;
+      --bg-surface: #0d1221;
+      --bg-elevated: #131a2e;
+      --bg-glass: rgba(13, 18, 33, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.09);
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --accent-emerald: #10b981;
+      --accent-emerald-glow: rgba(16, 185, 129, 0.16);
+      --accent-cyan: #06b6d4;
+      --accent-cyan-glow: rgba(6, 182, 212, 0.14);
+      --accent-gold: #f59e0b;
+      --accent-purple: #a855f7;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --font-serif: 'Crimson Pro', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -15%, rgba(6, 182, 212, 0.12), transparent 70%),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(16, 185, 129, 0.07), transparent 70%);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-block-size: 100dvh;
+    }
+
+    /* Top Academic Navigation Bar */
+    .academic-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding-block: 0.75rem;
+      padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: safe center;
+      gap: 1rem;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: safe center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .issn-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-emerald);
+      background: var(--accent-emerald-glow);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .series-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+
+    .topbar-nav {
+      display: flex;
+      flex-wrap: wrap;
+      flex-wrap: balance;
+      align-items: safe center;
+      gap: 0.65rem;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-subtle);
+    }
+
+    .nav-btn-primary {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #03150e;
+      background: var(--accent-emerald);
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    /* Page Container */
+    .page-shell {
+      max-inline-size: 1380px;
+      margin-inline: auto;
+      padding-block: 2rem 4rem;
+      padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* Academic Masthead */
+    .masthead {
+      border-bottom: 1px solid var(--border-strong);
+      padding-bottom: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1.5rem;
+    }
+
+    .masthead-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
+      margin-bottom: 0.45rem;
+    }
+
+    .masthead-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.85rem, 1.2rem + 2.2vw, 3rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+      max-inline-size: 28ch;
+    }
+
+    .masthead-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.3rem);
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-top: 0.55rem;
+      max-inline-size: 68ch;
+    }
+
+    .author-credentials {
+      margin-top: 0.85rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: safe center;
+    }
+
+    .author-credentials strong {
+      color: var(--text-primary);
+    }
+
+    .telemetry-box {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0.85rem 1.1rem;
+      gap: 1.25rem;
+    }
+
+    .telemetry-item {
+      padding-right: 1.25rem;
+      border-right: 1px solid var(--border-subtle);
+    }
+
+    .telemetry-item:last-child {
+      padding-right: 0;
+      border-right: none;
+    }
+
+    .telemetry-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .telemetry-val {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 0.15rem;
+    }
+
+    /* Section 1: Active Lecture Theater & Companion Monograph Dossier */
+    .theater-shell {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: clamp(1.25rem, 2.5vw, 2rem);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    .theater-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: safe center;
+      gap: 0.75rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1.35rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .theater-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    @media (min-width: 1024px) {
+      .theater-grid {
+        grid-template-columns: 7fr 5fr;
+      }
+    }
+
+    /* 16:9 Vlog Stage */
+    .video-stage {
+      aspect-ratio: 16 / 9;
+      inline-size: 100%;
+      background:
+        linear-gradient(180deg, rgba(9, 13, 24, 0.92) 0%, rgba(14, 21, 38, 0.96) 100%);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: clip;
+      box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.65);
+    }
+
+    .blackboard-center {
+      margin-block: auto;
+      text-align: center;
+      padding-inline: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .blackboard-chapter {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+    }
+
+    .blackboard-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 1rem + 0.75vw, 1.6rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      max-inline-size: 46ch;
+      line-height: 1.3;
+    }
+
+    .blackboard-math {
+      background: rgba(7, 10, 18, 0.85);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      border-radius: 8px;
+      padding: 0.65rem 1.15rem;
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      max-inline-size: 100%;
+      overflow-x: auto;
+    }
+
+    .play-lecture-btn {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #03150e;
+      background: var(--accent-emerald);
+      border: none;
+      padding: 0.55rem 1.35rem;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .play-lecture-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .scrubber-track {
+      inline-size: 100%;
+      block-size: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: clip;
+    }
+
+    .scrubber-bar {
+      block-size: 100%;
+      background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan));
+      transition: inline-size 0.3s ease;
+    }
+
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+
+    .chapter-btn {
+      text-align: left;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.65rem 0.8rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .chapter-btn:hover,
+    .chapter-btn.active {
+      border-color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.09);
+    }
+
+    /* Right Column: Synchronized Academic Dossier */
+    .dossier-panel {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-block-size: 600px;
+      overflow-y: auto;
+      scrollbar-gutter: stable;
+      overscroll-behavior: contain;
+    }
+
+    .theorem-box {
+      background: rgba(245, 158, 11, 0.06);
+      border-left: 3px solid var(--accent-gold);
+      border-top: 1px solid rgba(245, 158, 11, 0.2);
+      border-right: 1px solid rgba(245, 158, 11, 0.2);
+      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 0 8px 8px 0;
+      padding: 0.85rem 1rem;
+      margin-block: 0.85rem;
+    }
+
+    .friction-box {
+      background: rgba(168, 85, 247, 0.06);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-block: 0.85rem;
+    }
+
+    .ai-audit-box {
+      background: rgba(6, 182, 212, 0.06);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+
+    /* Filter Pills & Subgrid Episode Archive */
+    .filter-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      flex-wrap: balance;
+      gap: 0.5rem;
+      align-items: safe center;
+    }
+
+    .filter-btn {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      border-radius: 8px;
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--accent-emerald);
+      color: #03150e;
+      border-color: var(--accent-emerald);
+    }
+
+    .episode-grid {
+      inline-size: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.35rem;
+    }
+
+    .episode-card {
+      grid-row: span 4;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-rows: subgrid;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: clip;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .episode-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+    }
+
+    .episode-thumb {
+      aspect-ratio: 16 / 9;
+      inline-size: 100%;
+      background: linear-gradient(145deg, #0b1020 0%, #141e38 100%);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: clip;
+    }
+
+    /* Doctoral Syllabus Accordions */
+    details.syllabus-accordion {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      transition: border-color 0.2s ease;
+    }
+
+    details.syllabus-accordion[open] {
+      border-color: var(--accent-cyan);
+    }
+
+    details.syllabus-accordion > summary {
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: safe center;
+      gap: 0.75rem;
+    }
+
+    dialog.academic-modal {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      padding: 1.75rem;
+      max-inline-size: 640px;
+      inline-size: 92%;
+      margin: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
+    }
+
+    dialog.academic-modal::backdrop {
+      background: rgba(4, 6, 12, 0.78);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP ACADEMIC BAR -->
+  <header class="academic-topbar">
+    <div class="topbar-left">
+      <span class="issn-badge">ISSN: QIT-2026-VLOG</span>
+      <span class="series-label">OPEN-NOTEBOOK DOCTORAL MONOGRAPH &amp; VIDEO LECTURE SERIES</span>
+    </div>
+    <nav class="topbar-nav" aria-label="Primary Navigation">
+      <a href="#lecture-theater" class="nav-link">Lecture Theater</a>
+      <a href="#episode-archive" class="nav-link">Vlog Archive</a>
+      <a href="#doctoral-syllabus" class="nav-link">PhD Qualifying Syllabus</a>
+      <a href="index.html" class="nav-link">← Physics Textbook</a>
+      <button type="button" class="nav-btn-primary" onclick="document.getElementById('publish-modal').showModal()">
+        + Log New Vlog Episode
+      </button>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+
+    <!-- MASTHEAD -->
+    <section class="masthead" aria-label="Journal Identity">
+      <div>
+        <div class="masthead-kicker">Self-Directed Doctoral Research &amp; AI-Age Curriculum Design</div>
+        <h1 class="masthead-title">
+          From Classical Computation to Quantum Information Theory
+        </h1>
+        <p class="masthead-subtitle">
+          An open-notebook video lecture log, mathematical monograph, and epistemic field journal bridging Shannon information theory, computability, and quantum mechanics.
+        </p>
+        <div class="author-credentials">
+          <span><strong>Tuğcan Yıldırım</strong></span>
+          <span>•</span>
+          <span>M.A. Curriculum &amp; Instruction</span>
+          <span>•</span>
+          <span>Secondary Physics &amp; Theory of Knowledge (TOK) Specialist</span>
+        </div>
+      </div>
+
+      <dl class="telemetry-box">
+        <div class="telemetry-item">
+          <dt class="telemetry-label">Active Volume</dt>
+          <dd class="telemetry-val">Stage I / V</dd>
+        </div>
+        <div class="telemetry-item">
+          <dt class="telemetry-label">Lectures Filmed</dt>
+          <dd class="telemetry-val">04 Episodes</dd>
+        </div>
+        <div class="telemetry-item">
+          <dt class="telemetry-label">Proof Standard</dt>
+          <dd class="telemetry-val" style="color: var(--accent-emerald);">Closed-Book ✓</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- SECTION 1: FEATURED VLOG LECTURE THEATER & SYNCHRONIZED ACADEMIC DOSSIER -->
+    <section id="lecture-theater" class="theater-shell" aria-labelledby="theater-title">
+      <div class="theater-topbar">
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <span id="active-ep-code" class="issn-badge">VOL. I — LECTURE 03</span>
+          <h2 id="theater-title" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;">
+            Featured Vlog Lecture &amp; Synchronized Companion Monograph
+          </h2>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted);">
+          <span id="active-ep-date">Recorded: Oct 20, 2026</span> &bull; <span id="active-ep-duration">Duration: 28:15</span>
+        </div>
+      </div>
+
+      <div class="theater-grid">
+        <!-- LEFT 7 COLS: 16:9 VIDEO STAGE + TIMESTAMPS -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
+          <figure>
+            <div class="video-stage">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem;">
+                <span id="video-stage-badge" style="background: rgba(255,255,255,0.06); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid var(--border-subtle);">
+                  STAGE I • SHANNON INFORMATION THEORY
+                </span>
+                <span id="video-time-indicator" style="color: var(--accent-emerald); background: rgba(16,185,129,0.1); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid rgba(16,185,129,0.3);">
+                  05:42 / 28:15
+                </span>
+              </div>
+
+              <div class="blackboard-center">
+                <div id="video-chapter-label" class="blackboard-chapter">
+                  §2. BLACKBOARD DERIVATION • THE BRANCHING AXIOM
+                </div>
+                <div id="video-title-overlay" class="blackboard-heading">
+                  Surprisal, Additivity, and Why Shannon Entropy Must Be Logarithmic
+                </div>
+                <div id="video-equation-overlay" class="blackboard-math">
+                  $$H(p_1, p_2, p_3) = H(p_1, p_2 + p_3) + (p_2 + p_3)\,H\!\left(\frac{p_2}{p_2+p_3}, \frac{p_3}{p_2+p_3}\right)$$
+                </div>
+                <button type="button" id="play-btn" class="play-lecture-btn" onclick="togglePlaySimulation()">
+                  ▶ PLAY VLOG LECTURE
+                </button>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+                <div class="scrubber-track">
+                  <div id="scrubber-fill" class="scrubber-bar" style="inline-size: 28%;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">
+                  <span id="scrubber-status">PAUSED • CLICK ANY CHAPTER TIMESTAMP BELOW TO SEEK</span>
+                  <span>1080p60 • BLACKBOARD + CODE WALKTHROUGH</span>
+                </div>
+              </div>
+            </div>
+            <figcaption style="font-family: var(--font-serif); font-style: italic; font-size: 0.85rem; color: var(--text-muted); margin-top: 0.45rem; display: flex; justify-content: space-between;">
+              <span>Figure 1: Recorded blackboard derivation paired with interactive chapter markers.</span>
+              <span style="font-family: var(--font-mono); font-style: normal; font-size: 0.74rem; color: var(--text-secondary);">[YouTube / MP4 Embed Ready]</span>
+            </figcaption>
+          </figure>
+
+          <!-- Interactive Chapter Timestamps -->
+          <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+              Video Lecture Chapters &amp; Mathematical Checkpoints (Click to Seek)
+            </div>
+            <div id="chapter-buttons" class="chapter-grid"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT 5 COLS: ACADEMIC COMPANION DOSSIER -->
+        <aside class="dossier-panel" aria-label="Companion Monograph Dossier">
+          <div>
+            <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.85rem; margin-bottom: 1rem;">
+              <div id="dossier-module" style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-cyan);">
+                MODULE 102 • SHANNON INFORMATION THEORY
+              </div>
+              <h3 id="dossier-title" style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; line-height: 1.25; margin-top: 0.2rem;">
+                Surprisal, Additivity, and Why Shannon Entropy Must Be Logarithmic
+              </h3>
+            </div>
+
+            <div>
+              <h4 style="font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem;">
+                1. Lecture Abstract
+              </h4>
+              <p id="dossier-abstract" style="font-family: var(--font-serif); font-size: 1.02rem; color: var(--text-secondary); line-height: 1.55;"></p>
+            </div>
+
+            <div class="theorem-box">
+              <div id="dossier-theorem-label" style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.25rem;">
+                THEOREM 1.2 (KHINCHIN UNIQUENESS)
+              </div>
+              <div id="dossier-theorem-body" style="font-family: var(--font-serif); font-size: 0.98rem; color: var(--text-primary); line-height: 1.5;"></div>
+            </div>
+
+            <div class="friction-box">
+              <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: #d8b4fe; margin-bottom: 0.25rem;">
+                2. EPISTEMIC FRICTION (WHAT BROKE MY INTUITION ON CAMERA)
+              </div>
+              <p id="dossier-friction" style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;"></p>
+            </div>
+
+            <div class="ai-audit-box">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                <span style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--accent-cyan);">
+                  3. AI-AGE CURRICULUM AUDIT
+                </span>
+                <span id="dossier-ai-badge" style="font-family: var(--font-mono); font-size: 0.7rem; background: rgba(6,182,212,0.15); color: var(--accent-cyan); padding: 0.15rem 0.5rem; border-radius: 4px;">
+                  SOCRATIC REFEREE
+                </span>
+              </div>
+              <p id="dossier-ai-audit" style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;"></p>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.9rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.74rem;">
+            <span style="background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 0.35rem 0.7rem; border-radius: 6px;">
+              📄 LaTeX Companion Monograph
+            </span>
+            <span style="background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 0.35rem 0.7rem; border-radius: 6px;">
+              💻 Simulation Code
+            </span>
+            <span style="background: var(--accent-emerald-glow); border: 1px solid rgba(16,185,129,0.35); color: var(--accent-emerald); padding: 0.35rem 0.7rem; border-radius: 6px;">
+              ✓ Closed-Book Verified
+            </span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SECTION 2: VLOG EPISODE ARCHIVE -->
+    <section id="episode-archive" aria-labelledby="archive-heading" style="display: flex; flex-direction: column; gap: 1.35rem;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem;">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-emerald); text-transform: uppercase;">
+            Chronological Lecture Index
+          </div>
+          <h2 id="archive-heading" style="font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700;">
+            Published Vlog Episodes &amp; Research Logs
+          </h2>
+        </div>
+
+        <search aria-label="Filter vlog episodes by stage">
+          <div class="filter-pill-row">
+            <button type="button" class="filter-btn active" onclick="filterEpisodes('ALL', this)">All Volumes (04)</button>
+            <button type="button" class="filter-btn" onclick="filterEpisodes('STAGE I', this)">Stage I: Classical &amp; Shannon</button>
+            <button type="button" class="filter-btn" onclick="filterEpisodes('STAGE II', this)">Stage II: Hilbert Space</button>
+          </div>
+        </search>
+      </div>
+
+      <div id="episode-grid" class="episode-grid"></div>
+    </section>
+
+    <!-- SECTION 3: 5-STAGE DOCTORAL QUALIFYING SYLLABUS -->
+    <section id="doctoral-syllabus" aria-labelledby="syllabus-heading" style="display: flex; flex-direction: column; gap: 1.15rem;">
+      <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.9rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan); text-transform: uppercase;">
+          Self-Directed Doctoral Qualifying Curriculum
+        </div>
+        <h2 id="syllabus-heading" style="font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700;">
+          The 5-Stage Information-Theoretic Spine
+        </h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); max-inline-size: 75ch; margin-top: 0.25rem;">
+          Every module bridges classical computer science and Shannon theory directly into quantum computation and quantum information theory.
+        </p>
+      </div>
+
+      <details name="curriculum-stage" open class="syllabus-accordion">
+        <summary>
+          <span>Stage I — Classical Computation, Reversible Logic &amp; Shannon Information Theory</span>
+          <span class="issn-badge">ACTIVE VOLUME • 3 VLOGS FILMED</span>
+        </summary>
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">CLASSICAL CORE</div>
+            <p style="color: var(--text-secondary);">Turing machines, Boolean circuit complexity, Landauer's erasure bound ($k_B T \ln 2$), Toffoli/Fredkin reversible logic, Shannon entropy $H(X)$, Kullback-Leibler divergence $D(p\parallel q)$, Noisy Channel Coding Theorem.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-cyan); margin-bottom: 0.3rem;">QUANTUM INFORMATION BRIDGE</div>
+            <p style="color: var(--text-secondary);">Why unitary quantum evolution demands reversibility; Bennett's uncomputation trick to clear ancilla garbage before interference; $H(X)$ as the diagonal limit of Von Neumann entropy $S(\rho)$.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--text-muted);"><cite>Elements of Information Theory</cite> (Cover &amp; Thomas); <cite>Lectures on Computation</cite> (Feynman); <cite>Information Theory, Inference, and Learning Algorithms</cite> (MacKay).</p>
+          </div>
+        </div>
+      </details>
+
+      <details name="curriculum-stage" class="syllabus-accordion">
+        <summary>
+          <span>Stage II — Finite-Dimensional Hilbert Spaces, Quantum Postulates &amp; Non-Local Games</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">IN RECORDING • 1 VLOG FILMED</span>
+        </summary>
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">MATHEMATICAL SUBSTRATE</div>
+            <p style="color: var(--text-secondary);">Spectral Theorem for normal operators, Tensor products $\mathcal{H}_A \otimes \mathcal{H}_B$, Singular Value &amp; Schmidt Decomposition, Projective vs. POVM measurements.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-cyan); margin-bottom: 0.3rem;">INFORMATION-THEORETIC FOCUS</div>
+            <p style="color: var(--text-secondary);">No-Cloning &amp; No-Signaling duality; Bell inequalities framed as the CHSH cooperative information game (classical $75\%$ vs. Tsirelson $\cos^2(\pi/8) \approx 85.4\%$ quantum limit).</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--text-muted);"><cite>Quantum Computation and Quantum Information</cite> (Nielsen &amp; Chuang); <cite>The Theory of Quantum Information</cite> (Watrous).</p>
+          </div>
+        </div>
+      </details>
+
+      <details name="curriculum-stage" class="syllabus-accordion">
+        <summary>
+          <span>Stage III — Quantum Circuits, Oracular Complexity &amp; Algorithmic Speedups</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">UPCOMING VOLUME</span>
+        </summary>
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">ALGORITHMIC SPINE</div>
+            <p style="color: var(--text-secondary);">Universal gate sets, Solovay-Kitaev theorem, Phase kickback, Deutsch-Jozsa, Bernstein-Vazirani, Simon's periodicity, QFT, Shor's factoring, Grover's $\mathcal{O}(\sqrt{N})$ optimality proof.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-cyan); margin-bottom: 0.3rem;">INFORMATION-THEORETIC FOCUS</div>
+            <p style="color: var(--text-secondary);">Query complexity lower bounds via the hybrid/adversary method; how quantum interference concentrates probability mass without violating Holevo's bound.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--text-muted);"><cite>Quantum Computing Since Democritus</cite> (Aaronson); <cite>Classical and Quantum Computation</cite> (Kitaev, Shen &amp; Vyalyi).</p>
+          </div>
+        </div>
+      </details>
+
+      <details name="curriculum-stage" class="syllabus-accordion">
+        <summary>
+          <span>Stage IV — Quantum Information Theory: Channels, Entropy &amp; Entanglement Resource Theory</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-gold);">CORE DOCTORAL CONCENTRATION</span>
+        </summary>
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">OPEN SYSTEMS &amp; ENTROPY</div>
+            <p style="color: var(--text-secondary);">Density operators $\rho$, Purifications, CPTP Quantum Channels, Kraus &amp; Stinespring Dilation, Von Neumann Entropy $S(\rho) = -\operatorname{Tr}(\rho \log_2 \rho)$, Strong Subadditivity.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-cyan); margin-bottom: 0.3rem;">CAPACITIES &amp; ENTANGLEMENT</div>
+            <p style="color: var(--text-secondary);">Accessible information &amp; Holevo's Bound $\chi$, Schumacher quantum source coding, HSW classical capacity, Quantum capacity $Q$, LOCC &amp; Entanglement Distillation.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--text-muted);"><cite>Quantum Information Theory</cite> (Mark Wilde); <cite>The Theory of Quantum Information</cite> (John Watrous); Preskill Lecture Notes.</p>
+          </div>
+        </div>
+      </details>
+
+      <details name="curriculum-stage" class="syllabus-accordion">
+        <summary>
+          <span>Stage V — Quantum Error Correction, Complexity Theory (BQP / QMA) &amp; Thesis Monograph</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">CAPSTONE STAGE</span>
+        </summary>
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.84rem;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">FAULT TOLERANCE</div>
+            <p style="color: var(--text-secondary);">Pauli Stabilizer Formalism, Gottesman-Knill Theorem, Shor 9-qubit &amp; Steane 7-qubit codes, Topological Surface Codes, Fault-Tolerant Threshold Theorem.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-cyan); margin-bottom: 0.3rem;">QUANTUM COMPLEXITY</div>
+            <p style="color: var(--text-secondary);">$\text{BQP}$ vs $\text{PP}$, $\text{QMA}$-Completeness of the $k$-Local Hamiltonian Problem (quantum Cook-Levin), Device-Independent QKD.</p>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">PRIMARY MONOGRAPHS</div>
+            <p style="color: var(--text-muted);"><cite>Stabilizer Codes and Quantum Error Correction</cite> (Gottesman PhD Thesis); <cite>Quantum Hamiltonian Complexity</cite> (Gharibian et al.).</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- MODAL FOR PUBLISHING WORKFLOW -->
+  <dialog id="publish-modal" closedby="any" class="academic-modal">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.85rem; margin-bottom: 1rem;">
+      <h2 style="font-family: var(--font-serif); font-size: 1.35rem;">Update-As-You-Go Vlog Publishing Workflow</h2>
+      <form method="dialog">
+        <button style="background: var(--bg-elevated); color: var(--text-primary); border: 1px solid var(--border-subtle); padding: 0.3rem 0.65rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">✕ ESC</button>
+      </form>
+    </div>
+    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+      Each time you film a study vlog, add a single entry block to <code>data/qit-vlogs.json</code> (or ask Antigravity to log it for you). MathJax equations, chapter seek buttons, and syllabus counters update automatically:
+    </p>
+    <figure style="margin-bottom: 1.25rem;">
+      <figcaption style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-emerald); margin-bottom: 0.35rem;">
+        data/qit-vlogs.json schema:
+      </figcaption>
+      <pre tabindex="0" style="background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem; font-family: var(--font-mono); font-size: 0.75rem; overflow-x: auto; color: var(--text-secondary);"><code>{
+  "id": "ep-05",
+  "code": "VOL. I — LECTURE 05",
+  "stage": "STAGE I",
+  "module": "MOD-102 • SHANNON INFORMATION THEORY",
+  "date": "Nov 02, 2026",
+  "duration": "31:10",
+  "videoUrl": "https://www.youtube.com/embed/YOUR_VIDEO_ID",
+  "title": "Noisy Channel Coding Theorem &amp; Jointly Typical Sets",
+  "theoremLabel": "THEOREM 1.5 (SHANNON CHANNEL CAPACITY)",
+  "theoremBody": "C = \\max_{p(x)} I(X; Y) \\text{ bits per channel use}"
+}</code></pre>
+    </figure>
+    <form method="dialog" style="display: flex; justify-content: flex-end;">
+      <button class="nav-btn-primary">Close Preview</button>
+    </form>
+  </dialog>
+
+  <script>
+    const episodes = [
+      {
+        id: "ep-03",
+        code: "VOL. I — LECTURE 03",
+        stage: "STAGE I",
+        module: "MOD-102 • SHANNON INFORMATION THEORY",
+        date: "Oct 20, 2026",
+        duration: "28:15",
+        title: "Surprisal, Additivity, and Why Shannon Entropy Must Be Logarithmic",
+        equation: "$$H(p_1, p_2, p_3) = H(p_1, p_2 + p_3) + (p_2 + p_3)\\,H\\!\\left(\\frac{p_2}{p_2+p_3}, \\frac{p_3}{p_2+p_3}\\right)$$",
+        thumbEq: "$H(X) = -\\sum_{x} p(x) \\log_2 p(x)$",
+        abstract: "In this lecture vlog, I derive the functional form of Shannon entropy from scratch on the blackboard using Khinchin's four axioms, focusing on why recursive branching forces the logarithm.",
+        theoremLabel: "THEOREM 1.2 (KHINCHIN UNIQUENESS OF ENTROPY)",
+        theoremBody: "If $H_n(p_1, \\dots, p_n)$ is continuous, symmetric, maximized at the uniform distribution $(1/n, \\dots, 1/n)$, and satisfies the recursive branching axiom, then $H_n(p) = -k \\sum_{i=1}^n p_i \\log p_i$ for $k > 0$.",
+        friction: "At the start of my recording, I tried to justify the logarithm merely by citing independent additivity. While filming the proof, I realized additivity on uniform distributions only gives f(mn) = f(m)+f(n) on integers—it is the conditional branching axiom that bridges rational probabilities to continuous real distributions.",
+        aiBadge: "SOCRATIC REFEREE",
+        aiAudit: "After filming my blackboard proof, I transcribed my steps and prompted AI to act as a hostile mathematical referee. It flagged that I implicitly assumed differentiability of f(x) when moving from rationals to reals, whereas continuity + monotonicity suffices.",
+        chapters: [
+          { time: "00:00", pct: 8, label: "§1. Epistemic Motivation: Why Not Variance?", eq: "$$i(x) = -\\log_2 p(x) \\quad (\\text{Self-Information / Surprisal})$$" },
+          { time: "05:42", pct: 28, label: "§2. Blackboard Proof: The Branching Axiom", eq: "$$H(p_1, p_2, p_3) = H(p_1, p_2 + p_3) + (p_2 + p_3)\\,H\\!\\left(\\frac{p_2}{p_2+p_3}, \\frac{p_3}{p_2+p_3}\\right)$$" },
+          { time: "15:10", pct: 58, label: "§3. Epistemic Friction: From Rationals to Reals", eq: "$$f(m^k) = k\\,f(m) \\implies f(n) = c\\,\\log_2(n)$$" },
+          { time: "22:30", pct: 84, label: "§4. AI Proof Audit & Preview of Von Neumann Entropy", eq: "$$H(p) \\longrightarrow S(\\rho) = -\\operatorname{Tr}(\\rho \\log_2 \\rho)$$" }
+        ]
+      },
+      {
+        id: "ep-02",
+        code: "VOL. I — LECTURE 02",
+        stage: "STAGE I",
+        module: "MOD-101 • REVERSIBLE COMPUTATION & PHYSICS OF INFO",
+        date: "Oct 16, 2026",
+        duration: "31:40",
+        title: "Landauer's Principle, Toffoli Universality & Bennett's Uncomputation Trick",
+        equation: "$$\\Delta S_{\\text{env}} \\ge k_B \\ln 2 \\quad \\big| \\quad |a, b, c\\rangle \\mapsto |a, b, c \\oplus (a \\wedge b)\\rangle$$",
+        thumbEq: "$W_{\\text{erasure}} \\ge k_B T \\ln 2$",
+        abstract: "Why does classical irreversible logic dissipate heat, and why must quantum circuits be reversible? I walk through Landauer's phase-space compression argument and build a reversible NAND circuit using Toffoli gates.",
+        theoremLabel: "PROPOSITION 1.1 (BENNETT'S UNCOMPUTATION)",
+        theoremBody: "Any irreversible classical circuit computing $f: \\{0,1\\}^n \\to \\{0,1\\}^m$ in time $T$ can be simulated reversibly without leftover ancilla garbage in time $\\mathcal{O}(T)$ via compute–copy–uncompute.",
+        friction: "I initially assumed keeping ancilla 'history bits' around was harmless once the computation finished. Recording the quantum preview showed me why that fails: if ancilla garbage |g(x)⟩ remains entangled with |x, f(x)⟩, tracing out the garbage destroys quantum interference!",
+        aiBadge: "BRIDGE ARCHITECT",
+        aiAudit: "Co-designed a 3-stage curriculum bridge connecting Liouville's theorem in classical Hamiltonian mechanics to unitary evolution in Hilbert space.",
+        chapters: [
+          { time: "00:00", pct: 10, label: "§1. Why AND Gates Erase Information", eq: "$$H(\\text{Input}) = 2\\text{ bits} \\longrightarrow H(\\text{Output}) = 0.811\\text{ bits}$$" },
+          { time: "09:15", pct: 35, label: "§2. Landauer's Principle & Phase Space Compression", eq: "$$\\Delta Q \\ge k_B T \\ln 2 \\text{ per erased bit}$$" },
+          { time: "18:05", pct: 62, label: "§3. Universal Reversible Logic via Toffoli Gate", eq: "$$\\text{CCNOT}(a, b, 1) = (a, b, \\neg(a \\wedge b))$$" },
+          { time: "25:50", pct: 88, label: "§4. Why Garbage Bits Ruin Quantum Interference", eq: "$$\\sum_x |x\\rangle|f(x)\\rangle|g(x)\\rangle \\xrightarrow{\\text{Uncompute}} \\sum_x |x\\rangle|f(x)\\rangle|0\\rangle$$" }
+        ]
+      },
+      {
+        id: "ep-01",
+        code: "VOL. I — LECTURE 01",
+        stage: "STAGE I",
+        module: "MOD-101 • COMPUTABILITY & COMPLEXITY SPINE",
+        date: "Oct 10, 2026",
+        duration: "24:05",
+        title: "Inaugural Vlog: Designing a Self-Guided PhD in Quantum Information Theory",
+        equation: "$$\\mathsf{P} \\subseteq \\mathsf{BPP} \\subseteq \\mathsf{BQP} \\subseteq \\mathsf{PSPACE}$$",
+        thumbEq: "$\\Delta_n \\longrightarrow \\mathcal{D}(\\mathcal{H})$",
+        abstract: "An introduction to this open-notebook PhD vlog series: why approaching Quantum Computing through the lens of Information Theory unifies computer science and physics, and how I audit my learning in the age of AI.",
+        theoremLabel: "CURRICULUM THESIS (THE INFORMATION SPINE)",
+        theoremBody: "Quantum Mechanics is a non-commutative generalization of Classical Probability Theory in which the $\\ell_1$ probability simplex $\\Delta_n$ is replaced by the trace-$1$ positive semidefinite cone $\\mathcal{D}(\\mathcal{H})$ of density operators.",
+        friction: "Most curricula split CS (Turing machines, gates) from Physics (wavefunctions, Hamiltonians). Mapping the syllabus revealed that Shannon's source/channel theorems and Markov chains are the exact structural pre-image of open quantum systems.",
+        aiBadge: "CURRICULUM ARCHITECT",
+        aiAudit: "Used TOK epistemic standards to establish four strict 'Proof-of-Understanding Gates' so AI never replaces hand-worked derivations.",
+        chapters: [
+          { time: "00:00", pct: 12, label: "§1. Why Document a Self-Guided PhD on Camera?", eq: "$$\\text{Epistemic Authenticity} > \\text{AI-Generated Summaries}$$" },
+          { time: "07:30", pct: 40, label: "§2. Classical Probability vs. Quantum Amplitudes", eq: "$$\\sum_i p_i = 1 \\quad \\text{vs.} \\quad \\sum_i |\\alpha_i|^2 = 1$$" },
+          { time: "16:45", pct: 75, label: "§3. The 5-Stage Qualifying Syllabus Walkthrough", eq: "$$H(X) \\longrightarrow S(\\rho) \\longrightarrow \\text{CPTP Channels & QEC}$$" }
+        ]
+      },
+      {
+        id: "ep-04",
+        code: "VOL. II — LECTURE 01",
+        stage: "STAGE II",
+        module: "MOD-201 • HILBERT SPACES & QUANTUM POSTULATES",
+        date: "Oct 19, 2026",
+        duration: "26:50",
+        title: "The No-Cloning Theorem, Inner-Product Preservation & No-Signaling",
+        equation: "$$\\langle\\psi|\\phi\\rangle = (\\langle\\psi|\\phi\\rangle)^2 \\implies \\langle\\psi|\\phi\\rangle \\in \\{0, 1\\}$$",
+        thumbEq: "$U|\\psi\\rangle|0\\rangle \\neq |\\psi\\rangle|\\psi\\rangle$",
+        abstract: "A blackboard derivation of the Wootters-Zurek No-Cloning Theorem using unitary inner-product preservation, followed by a thought experiment showing how a hypothetical cloner would violate relativistic causality.",
+        theoremLabel: "THEOREM 2.1 (WOOTTERS–ZUREK NO-CLONING)",
+        theoremBody: "There exists no unitary operator $U$ on $\\mathcal{H} \\otimes \\mathcal{H}$ and fiducial state $|0\\rangle$ such that $U(|\\psi\\rangle \\otimes |0\\rangle) = e^{i\\theta(\\psi)}|\\psi\\rangle \\otimes |\\psi\\rangle$ for all normalized states $|\\psi\\rangle \\in \\mathcal{H}$.",
+        friction: "Tested whether a non-unitary CPTP quantum channel (using ancillas and measurements) could bypass the unitary proof. Proved via Stinespring Dilation that any channel is a unitary on a larger space, which still forces orthogonality.",
+        aiBadge: "COUNTEREXAMPLE GENERATOR",
+        aiAudit: "Challenged AI to construct an EPR superluminal signaling protocol assuming a hypothetical 1→2 cloner, then calculated the exact fidelity limit (F = 5/6) of an optimal Bužek-Hillery approximate cloner.",
+        chapters: [
+          { time: "00:00", pct: 10, label: "§1. Classical Fan-Out vs. Quantum Superposition", eq: "$$\\text{CNOT}(\\alpha|0\\rangle + \\beta|1\\rangle)|0\\rangle = \\alpha|00\\rangle + \\beta|11\\rangle \\neq |\\psi\\rangle|\\psi\\rangle$$" },
+          { time: "06:20", pct: 38, label: "§2. Two-Line Unitarity Proof on the Blackboard", eq: "$$\\langle\\psi|\\phi\\rangle = \\langle\\psi|\\phi\\rangle^2 \\implies \\langle\\psi|\\phi\\rangle \\in \\{0, 1\\}$$" },
+          { time: "14:50", pct: 66, label: "§3. Why Cloning Implies Faster-Than-Light Signaling", eq: "$$\\rho_A = \\operatorname{Tr}_B(|\\Phi^+\\rangle\\langle\\Phi^+|) = \\frac{1}{2}I$$" },
+          { time: "21:15", pct: 86, label: "§4. Optimal Approximate Cloning Fidelity (F = 5/6)", eq: "$$F = \\frac{5}{6} \\quad (\\text{Bu\\v{z}ek–Hillery Bound})$$" }
+        ]
+      }
+    ];
+
+    let currentEpisode = episodes[0];
+    let isPlaying = false;
+
+    function typesetMath() {
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    function loadEpisode(epId) {
+      const found = episodes.find(e => e.id === epId);
+      if (!found) return;
+      currentEpisode = found;
+      isPlaying = false;
+
+      document.getElementById('active-ep-code').textContent = found.code;
+      document.getElementById('active-ep-date').textContent = `Recorded: ${found.date}`;
+      document.getElementById('active-ep-duration').textContent = `Duration: ${found.duration}`;
+      document.getElementById('video-stage-badge').textContent = `${found.stage} • ${found.module.split('•')[1].trim()}`;
+      document.getElementById('video-title-overlay').textContent = found.title;
+      document.getElementById('play-btn').textContent = '▶ PLAY VLOG LECTURE';
+
+      document.getElementById('dossier-module').textContent = found.module;
+      document.getElementById('dossier-title').textContent = found.title;
+      document.getElementById('dossier-abstract').textContent = found.abstract;
+      document.getElementById('dossier-theorem-label').textContent = found.theoremLabel;
+      document.getElementById('dossier-theorem-body').innerHTML = found.theoremBody;
+      document.getElementById('dossier-friction').textContent = found.friction;
+      document.getElementById('dossier-ai-badge').textContent = found.aiBadge;
+      document.getElementById('dossier-ai-audit').textContent = found.aiAudit;
+
+      const chEl = document.getElementById('chapter-buttons');
+      chEl.innerHTML = found.chapters.map((ch, idx) => `
+        <button type="button" id="ch-btn-${idx}" class="chapter-btn" onclick="seekChapter(${idx})">
+          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-emerald);">
+            <span>▶ ${ch.time}</span>
+            <span style="color: var(--text-muted);">Ch. 0${idx + 1}</span>
+          </div>
+          <div style="font-size: 0.78rem; font-weight: 600; margin-top: 0.2rem;">${ch.label}</div>
+        </button>
+      `).join('');
+
+      seekChapter(1);
+    }
+
+    function seekChapter(chIdx) {
+      const ch = currentEpisode.chapters[chIdx] || currentEpisode.chapters[0];
+      document.getElementById('video-time-indicator').textContent = `${ch.time} / ${currentEpisode.duration}`;
+      document.getElementById('video-chapter-label').textContent = ch.label.toUpperCase();
+      document.getElementById('video-equation-overlay').innerHTML = ch.eq;
+      document.getElementById('scrubber-fill').style.inlineSize = `${ch.pct}%`;
+      document.getElementById('scrubber-status').textContent = `JUMPED TO ${ch.time} • ${ch.label}`;
+
+      currentEpisode.chapters.forEach((_, i) => {
+        const btn = document.getElementById(`ch-btn-${i}`);
+        if (btn) btn.classList.toggle('active', i === chIdx);
+      });
+
+      typesetMath();
+    }
+
+    function togglePlaySimulation() {
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('play-btn');
+      const status = document.getElementById('scrubber-status');
+      if (isPlaying) {
+        btn.textContent = '⏸ PAUSE VLOG LECTURE';
+        status.textContent = 'PLAYING LECTURE STREAM • SYNCHRONIZED DOSSIER ACTIVE';
+      } else {
+        btn.textContent = '▶ RESUME VLOG LECTURE';
+        status.textContent = 'PAUSED • CLICK ANY CHAPTER TIMESTAMP BELOW TO SEEK';
+      }
+    }
+
+    function renderEpisodeArchive(stageFilter = 'ALL') {
+      const grid = document.getElementById('episode-grid');
+      const filtered = stageFilter === 'ALL'
+        ? episodes
+        : episodes.filter(e => e.stage === stageFilter);
+
+      grid.innerHTML = filtered.map(ep => `
+        <article class="episode-card">
+          <div class="episode-thumb">
+            <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem;">
+              <span style="color: var(--accent-emerald); font-weight: 700;">${ep.code}</span>
+              <span style="background: rgba(0,0,0,0.45); padding: 0.1rem 0.45rem; border-radius: 4px;">⏱ ${ep.duration}</span>
+            </div>
+            <div style="margin-block: auto; text-align: center; font-size: 0.9rem; color: var(--text-primary);">
+              ${ep.thumbEq}
+            </div>
+            <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">
+              <span>${ep.stage}</span>
+              <span>${ep.date}</span>
+            </div>
+          </div>
+
+          <div style="padding: 1rem 1.15rem 0.25rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-cyan);">${ep.module}</div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.18rem; font-weight: 700; line-height: 1.25; margin-top: 0.2rem;">
+              ${ep.title}
+            </h3>
+          </div>
+
+          <div style="padding: 0.5rem 1.15rem 0.85rem;">
+            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">${ep.abstract}</p>
+          </div>
+
+          <div style="padding: 0.75rem 1.15rem 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-emerald);">✓ Proof + AI Audit</span>
+            <button type="button" class="nav-btn-primary" onclick="loadEpisode('${ep.id}'); document.getElementById('lecture-theater').scrollIntoView({behavior: 'smooth'});">
+              ▶ Watch &amp; Open Dossier
+            </button>
+          </div>
+        </article>
+      `).join('');
+
+      typesetMath();
+    }
+
+    function filterEpisodes(stage, btnEl) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      renderEpisodeArchive(stage);
+    }
+
+    loadEpisode('ep-03');
+    renderEpisodeArchive('ALL');
+  </script>
+</body>
+</html>
